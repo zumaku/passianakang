@@ -19,13 +19,13 @@ export class FamilyTreeService {
       '<rect x="0" y="0" height="100" width="230" fill="#1e293b" rx="14" ry="14" stroke="#475569" stroke-width="1.5" class="ft-node-rect"></rect>' +
       '<line x1="0" y1="0" x2="230" y2="0" stroke="#3b82f6" stroke-width="4" rx="2" class="ft-node-accent"></line>';
 
-    // Image avatar configuration
+    // Image avatar configuration - Use node {id} for clipPath ID so it forms a valid SVG selector
     FamilyTree.templates.modernGlass.img_0 = 
-      '<clipPath id="avatarClip_{val}">' +
+      '<clipPath id="avatarClip_{id}">' +
         '<circle cx="42" cy="50" r="28"></circle>' +
       '</clipPath>' +
       '<circle cx="42" cy="50" r="30" fill="#3b82f6" opacity="0.3"></circle>' +
-      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{val})" xlink:href="{val}" x="14" y="22" width="56" height="56"></image>';
+      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="14" y="22" width="56" height="56"></image>';
 
     // Name text
     FamilyTree.templates.modernGlass.field_0 = 
@@ -99,18 +99,16 @@ export class FamilyTreeService {
           onClick: (id) => this.triggerAddRelative(id) 
         }
       },
-      editForm: {
-        readOnly: true
-      }
+      editForm: null // Disable built-in Balkan edit form to prevent overlapping sidebars
     });
 
-    // Handle node click event
+    // Handle node click event - return false to cancel Balkan built-in sidebar popup
     this.familyTree.onNodeClick((args) => {
       if (this.onNodeSelectedCallback) {
         const node = this.getNodeById(args.node.id);
         this.onNodeSelectedCallback(node);
       }
-      return true;
+      return false;
     });
 
     // Return current count

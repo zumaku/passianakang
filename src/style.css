@@ -162,6 +162,18 @@ body {
   fill: #94a3b8 !important;
 }
 
+/* Hide Balkan FamilyTree built-in edit form elements to prevent overlapping sidebars */
+.bft-edit-form-wrapper,
+.bft-edit-form,
+[data-edit-form],
+.bft-form,
+.bft-search-form {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Floating Controls Bar */
 .floating-controls {
   position: absolute;
