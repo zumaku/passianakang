@@ -52,6 +52,7 @@ export class UIController {
 
     // Controls bar
     this.btnAddMember = document.getElementById('btnAddMember');
+    this.btnEditNav = document.getElementById('btnEditNav');
     this.btnResetData = document.getElementById('btnResetData');
     this.btnExportJSON = document.getElementById('btnExportJSON');
     this.btnImportJSON = document.getElementById('btnImportJSON');
@@ -77,6 +78,19 @@ export class UIController {
     // Modal controls
     if (this.btnAddMember) {
       this.btnAddMember.addEventListener('click', () => this.openAddMemberModal());
+    }
+    if (this.btnEditNav) {
+      this.btnEditNav.addEventListener('click', () => {
+        if (this.activeMemberId) {
+          this.openEditMemberModal(this.activeMemberId);
+        } else if (this.currentData.length > 0) {
+          // If no member selected, edit first member or show notice
+          this.openEditMemberModal(this.currentData[0].id);
+          this.showToast(`Membuka form edit untuk "${this.currentData[0].name}". Klik node anggota lain untuk mengeditnya.`, 'info');
+        } else {
+          this.showToast('Belum ada data anggota untuk diedit.', 'error');
+        }
+      });
     }
     if (this.btnCloseModal) {
       this.btnCloseModal.addEventListener('click', () => this.closeMemberModal());

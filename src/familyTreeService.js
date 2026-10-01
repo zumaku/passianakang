@@ -94,6 +94,10 @@ export class FamilyTreeService {
           text: '🔍 Lihat Detail', 
           onClick: (id) => this.triggerSelectNode(id) 
         },
+        edit: {
+          text: '✏️ Edit Data Anggota',
+          onClick: (id) => this.triggerEditNode(id)
+        },
         add: { 
           text: '➕ Tambah Kerabat', 
           onClick: (id) => this.triggerAddRelative(id) 
@@ -151,6 +155,12 @@ export class FamilyTreeService {
     const node = this.getNodeById(id);
     if (node && this.onNodeSelectedCallback) {
       this.onNodeSelectedCallback(node);
+    }
+  }
+
+  triggerEditNode(id) {
+    if (window.appUI) {
+      window.appUI.openEditMemberModal(id);
     }
   }
 
