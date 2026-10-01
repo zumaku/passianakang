@@ -9,13 +9,20 @@ export class StorageService {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
+          const isValid = parsed.every(item => item && typeof item === 'object' && item.id);
+          if (isValid) {
+            return parsed;
+          }
         }
       }
     } catch (e) {
-      console.warn('Gagal membaca LocalStorage, menggunakan data default:', e);
+      console.warn('Gagal membaca LocalStorage, memulihkan data default:', e);
     }
-    return [...DEFAULT_FAMILY_DATA];
+
+    // Auto-heal LocalStorage if empty or invalid
+    const defaultData = JSON.parse(JSON.stringify(DEFAULT_FAMILY_DATA));
+    this.saveData(defaultData);
+    return defaultData;
   }
 
   static saveData(data) {
@@ -30,7 +37,9 @@ export class StorageService {
 
   static resetToDefault() {
     localStorage.removeItem(STORAGE_KEY);
-    return [...DEFAULT_FAMILY_DATA];
+    const defaultData = JSON.parse(JSON.stringify(DEFAULT_FAMILY_DATA));
+    this.saveData(defaultData);
+    return defaultData;
   }
 
   static exportJSON(data, filename = 'silsilah_keluarga.json') {
@@ -53,10 +62,9 @@ export class StorageService {
       reader.onload = (event) => {
         try {
           const parsed = JSON.parse(event.target.result);
-          if (!Array.isArray(parsed)) {
-            throw new Error('Format file JSON tidak valid. Harus berupa list array data anggota.');
+          if (!Array.isArray(parsed) || parsed.length === 0) {
+            throw new Error('Format file JSON tidak valid. Data tidak boleh kosong.');
           }
-          // Simple validation check for id property
           const isValid = parsed.every(item => item && typeof item === 'object' && 'id' in item);
           if (!isValid) {
             throw new Error('Data JSON tidak memiliki struktur id anggota yang benar.');

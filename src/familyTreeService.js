@@ -66,6 +66,9 @@ export class FamilyTreeService {
       if (!copy.img) {
         copy.img = copy.gender === 'female' ? defaultAvatarFemale : defaultAvatarMale;
       }
+      if (!copy.tags || !Array.isArray(copy.tags)) {
+        copy.tags = [copy.gender || 'male'];
+      }
       return copy;
     });
 
@@ -114,6 +117,13 @@ export class FamilyTreeService {
       }
       return false;
     });
+
+    // Auto-fit tree scale after render
+    setTimeout(() => {
+      if (this.familyTree) {
+        this.familyTree.fit();
+      }
+    }, 100);
 
     // Return current count
     return processedNodes.length;
