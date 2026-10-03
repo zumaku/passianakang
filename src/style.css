@@ -711,9 +711,20 @@ g[data-ctrl-n-menu-id]:hover circle {
   font-weight: 600;
 }
 
+#memberForm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .modal-body {
+  flex: 1;
   padding: 24px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .form-grid {
@@ -1027,7 +1038,8 @@ textarea.form-control {
   /* Modal Form responsive 1-column layout */
   .modal-container {
     width: 94%;
-    max-height: 88vh;
+    max-height: 90vh;
+    max-height: 90dvh;
     border-radius: var(--radius-md);
   }
 

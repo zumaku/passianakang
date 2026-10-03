@@ -220,11 +220,11 @@ export class UIController {
     }
 
     if (this.btnResetData) {
-      this.btnResetData.addEventListener('click', () => {
-        if (confirm('Apakah Anda yakin ingin mengembalikan data ke contoh default silsilah 3 generasi?')) {
-          const resetData = StorageService.resetToDefault();
-          this.updateDataAndRender(resetData);
-          this.showToast('Data silsilah telah dikembalikan ke data sampel.', 'info');
+      this.btnResetData.addEventListener('click', async () => {
+        if (confirm('Apakah Anda yakin ingin mengembalikan data ke template default silsilah?')) {
+          const resetData = await StorageService.resetToDefault();
+          await this.updateDataAndRender(resetData);
+          this.showToast('Data silsilah telah dikembalikan ke template bawaan.', 'info');
         }
       });
     }
@@ -241,9 +241,9 @@ export class UIController {
     }
   }
 
-  updateDataAndRender(newData) {
+  async updateDataAndRender(newData) {
     this.currentData = newData;
-    StorageService.saveData(newData);
+    await StorageService.saveData(newData);
     this.treeService.render(newData);
     this.updateStats();
     this.closeDetailPanel();
