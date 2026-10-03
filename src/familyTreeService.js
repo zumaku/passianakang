@@ -17,10 +17,10 @@ export class FamilyTreeService {
     // Three dots menu button (positioned top right)
     const customNodeMenuButton =
       '<g style="cursor:pointer;" transform="matrix(1,0,0,1,210,10)" data-ctrl-n-menu-id="{id}">' +
-        '<rect x="0" y="0" width="28" height="28" rx="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" class="ft-menu-btn" data-ctrl-n-menu-id="{id}"></rect>' +
-        '<circle cx="14" cy="7" r="2.2" fill="#cbd5e1" data-ctrl-n-menu-id="{id}" style="pointer-events:none;"></circle>' +
-        '<circle cx="14" cy="14" r="2.2" fill="#cbd5e1" data-ctrl-n-menu-id="{id}" style="pointer-events:none;"></circle>' +
-        '<circle cx="14" cy="21" r="2.2" fill="#cbd5e1" data-ctrl-n-menu-id="{id}" style="pointer-events:none;"></circle>' +
+        '<rect x="0" y="0" width="28" height="28" rx="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" class="ft-menu-btn"></rect>' +
+        '<circle cx="14" cy="7" r="2.2" fill="#cbd5e1" style="pointer-events:none;"></circle>' +
+        '<circle cx="14" cy="14" r="2.2" fill="#cbd5e1" style="pointer-events:none;"></circle>' +
+        '<circle cx="14" cy="21" r="2.2" fill="#cbd5e1" style="pointer-events:none;"></circle>' +
       '</g>';
 
     // Up / expand tree connection button (Treemap / Hierarchy Icon)
@@ -163,8 +163,9 @@ export class FamilyTreeService {
       this.container.addEventListener('click', (e) => {
         const menuBtn = e.target.closest('[data-ctrl-n-menu-id]') || e.target.closest('.ft-menu-btn');
         if (menuBtn && this.familyTree) {
-          const nodeId = menuBtn.getAttribute('data-ctrl-n-menu-id');
-          if (nodeId && this.familyTree.nodeMenuUI) {
+          const nodeCard = e.target.closest('[data-n-id]');
+          const nodeId = nodeCard ? nodeCard.getAttribute('data-n-id') : menuBtn.getAttribute('data-ctrl-n-menu-id');
+          if (nodeId && nodeId !== '{id}' && this.familyTree.nodeMenuUI) {
             e.stopPropagation();
             e.preventDefault();
             this.familyTree.nodeMenuUI.showStickIn(menuBtn, nodeId, null, nodeMenuConfig);
