@@ -12,43 +12,47 @@ export class FamilyTreeService {
   initCustomTemplates() {
     // Custom modern template based on 'tommy'
     FamilyTree.templates.modernGlass = Object.assign({}, FamilyTree.templates.tommy);
-    FamilyTree.templates.modernGlass.size = [230, 100];
-    
-    // Node SVG background with smooth rounded corners and border
-    FamilyTree.templates.modernGlass.node = 
-      '<rect x="0" y="0" height="100" width="230" fill="#1e293b" rx="14" ry="14" stroke="#475569" stroke-width="1.5" class="ft-node-rect"></rect>' +
-      '<line x1="0" y1="0" x2="230" y2="0" stroke="#45A692" stroke-width="4" rx="2" class="ft-node-accent"></line>';
+    FamilyTree.templates.modernGlass.size = [250, 110];
 
-    // Image avatar configuration - Use node {id} for clipPath ID so it forms a valid SVG selector
-    FamilyTree.templates.modernGlass.img_0 = 
+    // Node SVG background with text clipPath to prevent text overflow
+    FamilyTree.templates.modernGlass.node =
+      '<rect x="0" y="0" height="110" width="250" fill="#1e293b" rx="14" ry="14" stroke="#475569" stroke-width="1.5" class="ft-node-rect"></rect>' +
+      '<line x1="0" y1="0" x2="250" y2="0" stroke="#45A692" stroke-width="4" rx="2" class="ft-node-accent"></line>' +
+      '<clipPath id="textClip_{id}"><rect x="80" y="20" width="158" height="80" /></clipPath>';
+
+    // Image avatar configuration
+    FamilyTree.templates.modernGlass.img_0 =
       '<clipPath id="avatarClip_{id}">' +
-        '<circle cx="42" cy="50" r="28"></circle>' +
+        '<circle cx="42" cy="55" r="28"></circle>' +
       '</clipPath>' +
-      '<circle cx="42" cy="50" r="30" fill="#45A692" opacity="0.3"></circle>' +
-      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="14" y="22" width="56" height="56"></image>';
+      '<circle cx="42" cy="55" r="30" fill="#45A692" opacity="0.3"></circle>' +
+      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="14" y="27" width="56" height="56"></image>';
 
-    // Name text
-    FamilyTree.templates.modernGlass.field_0 = 
-      '<text style="font-size: 14px; font-weight: 600; font-family: Inter, sans-serif;" fill="#f8fafc" x="84" y="42">{val}</text>';
+    // Name text (clipped within card)
+    FamilyTree.templates.modernGlass.field_0 =
+      '<text clip-path="url(#textClip_{id})" style="font-size: 13px; font-weight: 600; font-family: Inter, sans-serif;" fill="#f8fafc" x="84" y="44">{val}</text>';
 
-    // Title / Relationship text
-    FamilyTree.templates.modernGlass.field_1 = 
-      '<text style="font-size: 11px; font-family: Inter, sans-serif;" fill="#94a3b8" x="84" y="60">{val}</text>';
+    // Title / Relationship text (clipped)
+    FamilyTree.templates.modernGlass.field_1 =
+      '<text clip-path="url(#textClip_{id})" style="font-size: 11px; font-family: Inter, sans-serif;" fill="#94a3b8" x="84" y="62">{val}</text>';
 
-    // Birth Date text
-    FamilyTree.templates.modernGlass.field_2 = 
-      '<text style="font-size: 10px; font-family: Inter, sans-serif;" fill="#64748b" x="84" y="76">🎂 {val}</text>';
+    // Birth Date text (clipped)
+    FamilyTree.templates.modernGlass.field_2 =
+      '<text clip-path="url(#textClip_{id})" style="font-size: 10px; font-family: Inter, sans-serif;" fill="#64748b" x="84" y="80">{val}</text>';
 
-    // Custom male & female node accents
+    // Custom male node accent
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
-    FamilyTree.templates.modernGlass_male.node = 
-      '<rect x="0" y="0" height="100" width="230" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5"></rect>' +
-      '<rect x="0" y="0" height="100" width="6" fill="#45A692" rx="3"></rect>';
+    FamilyTree.templates.modernGlass_male.node =
+      '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5"></rect>' +
+      '<rect x="0" y="0" height="110" width="6" fill="#45A692" rx="3"></rect>' +
+      '<clipPath id="textClip_{id}"><rect x="80" y="20" width="158" height="80" /></clipPath>';
 
+    // Custom female node accent
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
-    FamilyTree.templates.modernGlass_female.node = 
-      '<rect x="0" y="0" height="100" width="230" fill="#0f172a" rx="14" ry="14" stroke="#db2777" stroke-width="1.5"></rect>' +
-      '<rect x="0" y="0" height="100" width="6" fill="#ec4899" rx="3"></rect>';
+    FamilyTree.templates.modernGlass_female.node =
+      '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#db2777" stroke-width="1.5"></rect>' +
+      '<rect x="0" y="0" height="110" width="6" fill="#ec4899" rx="3"></rect>' +
+      '<clipPath id="textClip_{id}"><rect x="80" y="20" width="158" height="80" /></clipPath>';
   }
 
   render(nodesData) {
@@ -93,17 +97,17 @@ export class FamilyTreeService {
         }
       },
       nodeMenu: {
-        details: { 
-          text: '🔍 Lihat Detail', 
-          onClick: (id) => this.triggerSelectNode(id) 
+        details: {
+          text: '🔍 Lihat Detail',
+          onClick: (id) => this.triggerSelectNode(id)
         },
         edit: {
           text: '✏️ Edit Data Anggota',
           onClick: (id) => this.triggerEditNode(id)
         },
-        add: { 
-          text: '➕ Tambah Kerabat', 
-          onClick: (id) => this.triggerAddRelative(id) 
+        add: {
+          text: '➕ Tambah Kerabat',
+          onClick: (id) => this.triggerAddRelative(id)
         }
       },
       editForm: null // Disable built-in Balkan edit form to prevent overlapping sidebars
