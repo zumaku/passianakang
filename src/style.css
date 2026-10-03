@@ -599,7 +599,8 @@ g[data-ctrl-n-menu-id]:hover circle {
   border-radius: var(--radius-md) !important;
   box-shadow: var(--shadow-lg) !important;
   padding: 6px !important;
-  z-index: 100 !important;
+  z-index: 1000 !important;
+  pointer-events: auto !important;
 }
 
 [data-ctrl-menu] div,
@@ -616,6 +617,7 @@ g[data-ctrl-n-menu-id]:hover circle {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
+  pointer-events: auto !important;
 }
 
 [data-ctrl-menu] div:hover,

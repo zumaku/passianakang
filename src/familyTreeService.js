@@ -17,10 +17,10 @@ export class FamilyTreeService {
     // Three dots menu button (positioned top right)
     const customNodeMenuButton =
       '<g style="cursor:pointer;" transform="matrix(1,0,0,1,210,10)" data-ctrl-n-menu-id="{id}">' +
-        '<rect x="0" y="0" width="28" height="28" rx="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" class="ft-menu-btn"></rect>' +
-        '<circle cx="14" cy="7" r="2.2" fill="#cbd5e1"></circle>' +
-        '<circle cx="14" cy="14" r="2.2" fill="#cbd5e1"></circle>' +
-        '<circle cx="14" cy="21" r="2.2" fill="#cbd5e1"></circle>' +
+        '<rect x="0" y="0" width="28" height="28" rx="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" class="ft-menu-btn" data-ctrl-n-menu-id="{id}"></rect>' +
+        '<circle cx="14" cy="7" r="2.2" fill="#cbd5e1" data-ctrl-n-menu-id="{id}" style="pointer-events:none;"></circle>' +
+        '<circle cx="14" cy="14" r="2.2" fill="#cbd5e1" data-ctrl-n-menu-id="{id}" style="pointer-events:none;"></circle>' +
+        '<circle cx="14" cy="21" r="2.2" fill="#cbd5e1" data-ctrl-n-menu-id="{id}" style="pointer-events:none;"></circle>' +
       '</g>';
 
     // Up / expand tree connection button (Treemap / Hierarchy Icon)
@@ -114,6 +114,24 @@ export class FamilyTreeService {
       return copy;
     });
 
+    const nodeMenuConfig = {
+      details: {
+        text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Lihat Detail',
+        icon: '',
+        onClick: (id) => this.triggerSelectNode(id)
+      },
+      edit: {
+        text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit Anggota',
+        icon: '',
+        onClick: (id) => this.triggerEditNode(id)
+      },
+      add: {
+        text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="16" x2="22" y1="11" y2="11"/></svg>Tambah Kerabat',
+        icon: '',
+        onClick: (id) => this.triggerAddRelative(id)
+      }
+    };
+
     this.familyTree = new FamilyTree(this.container, {
       nodes: processedNodes,
       template: 'modernGlass',
@@ -128,29 +146,15 @@ export class FamilyTreeService {
       },
       tags: {
         male: {
-          template: 'modernGlass_male'
+          template: 'modernGlass_male',
+          nodeMenu: nodeMenuConfig
         },
         female: {
-          template: 'modernGlass_female'
+          template: 'modernGlass_female',
+          nodeMenu: nodeMenuConfig
         }
       },
-      nodeMenu: {
-        details: {
-          text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Lihat Detail',
-          icon: '',
-          onClick: (id) => this.triggerSelectNode(id)
-        },
-        edit: {
-          text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit Anggota',
-          icon: '',
-          onClick: (id) => this.triggerEditNode(id)
-        },
-        add: {
-          text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="16" x2="22" y1="11" y2="11"/></svg>Tambah Kerabat',
-          icon: '',
-          onClick: (id) => this.triggerAddRelative(id)
-        }
-      },
+      nodeMenu: nodeMenuConfig,
       editForm: null // Disable built-in Balkan edit form to prevent overlapping sidebars
     });
 
