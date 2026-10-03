@@ -242,7 +242,8 @@ export class FamilyTreeService {
       try {
         this.familyTree.center(id);
 
-        // Clear existing highlights
+        // Clear existing highlights and mobile badges
+        document.querySelectorAll('.ft-search-tag, .ft-search-pulse-ring').forEach(el => el.remove());
         document.querySelectorAll('.ft-node-highlight, .ft-node-active').forEach(el => {
           el.classList.remove('ft-node-highlight', 'ft-node-active');
         });
@@ -254,9 +255,30 @@ export class FamilyTreeService {
 
         if (nodeEl) {
           nodeEl.classList.add('ft-node-highlight', 'ft-node-active');
+
+          // Append native SVG pulse ring and floating badge for mobile browser compatibility
+          const pulseRing = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          pulseRing.setAttribute('class', 'ft-search-pulse-ring');
+          pulseRing.setAttribute('x', '-6');
+          pulseRing.setAttribute('y', '-6');
+          pulseRing.setAttribute('width', '262');
+          pulseRing.setAttribute('height', '122');
+          pulseRing.setAttribute('rx', '18');
+
+          const tagGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          tagGroup.setAttribute('class', 'ft-search-tag');
+          tagGroup.setAttribute('transform', 'translate(65, -26)');
+          tagGroup.innerHTML = `
+            <rect x="0" y="0" width="120" height="22" rx="11" fill="#45A692" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="60" y="15" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter, sans-serif" fill="#ffffff">🎯 HASIL CARI</text>
+          `;
+
+          nodeEl.appendChild(pulseRing);
+          nodeEl.appendChild(tagGroup);
+
           setTimeout(() => {
             if (nodeEl) nodeEl.classList.remove('ft-node-highlight');
-          }, 4500);
+          }, 5000);
         }
       } catch (err) {
         console.warn('Could not center node:', err);

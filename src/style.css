@@ -265,6 +265,35 @@ html, body {
   z-index: 100 !important;
 }
 
+/* SVG Native Mobile-Compatible Search Ring & Tag */
+.ft-search-pulse-ring {
+  fill: none !important;
+  stroke: #00ffcc !important;
+  stroke-width: 4px !important;
+  animation: svgRingPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes svgRingPulse {
+  from {
+    stroke: #00ffcc;
+    stroke-width: 4px;
+  }
+  to {
+    stroke: #45A692;
+    stroke-width: 7px;
+  }
+}
+
+.ft-search-tag {
+  pointer-events: none;
+  animation: svgTagBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes svgTagBounce {
+  0% { transform: translate(65px, -45px) scale(0.6); opacity: 0; }
+  100% { transform: translate(65px, -26px) scale(1); opacity: 1; }
+}
+
 /* Main Canvas Area */
 .main-content {
   flex: 1;
