@@ -588,7 +588,8 @@ g[data-ctrl-n-menu-id]:hover circle {
   fill: #ffffff !important;
 }
 
-/* Balkan Node Popup Option Menu Glassmorphism Styling */
+/* Balkan Node Popup Option Menu Glassmorphism Styling (.bft-family-menu) */
+.bft-family-menu,
 [data-ctrl-menu],
 .bft-node-menu,
 .bft-menu {
@@ -601,17 +602,21 @@ g[data-ctrl-n-menu-id]:hover circle {
   padding: 6px !important;
   z-index: 1000 !important;
   pointer-events: auto !important;
+  overflow: hidden;
 }
 
+.bft-family-menu [data-item],
 [data-ctrl-menu] div,
 .bft-menu div,
 .bft-menu-item {
+  background: transparent !important;
   color: var(--text-main) !important;
   font-family: 'Inter', sans-serif !important;
   font-size: 13px !important;
   font-weight: 500 !important;
   padding: 9px 16px !important;
   border-radius: var(--radius-sm) !important;
+  border-bottom: none !important;
   transition: all 0.2s ease !important;
   cursor: pointer !important;
   display: flex !important;
@@ -620,27 +625,37 @@ g[data-ctrl-n-menu-id]:hover circle {
   pointer-events: auto !important;
 }
 
+.bft-family-menu [data-item]:hover,
 [data-ctrl-menu] div:hover,
 .bft-menu div:hover,
 .bft-menu-item:hover {
-  background: rgba(69, 166, 146, 0.25) !important;
-  color: #ffffff !important;
+  background: rgba(69, 166, 146, 0.2) !important;
+  color: var(--text-main) !important;
 }
 
+body.theme-light .bft-family-menu [data-item]:hover {
+  background: rgba(45, 122, 104, 0.15) !important;
+  color: var(--text-main) !important;
+}
+
+.bft-family-menu [data-item] svg,
 [data-ctrl-menu] div svg,
 .bft-menu div svg,
 .bft-menu-item svg {
   color: var(--primary) !important;
   stroke: var(--primary) !important;
   flex-shrink: 0 !important;
+  filter: none !important;
   transition: all 0.2s ease !important;
 }
 
+.bft-family-menu [data-item]:hover svg,
 [data-ctrl-menu] div:hover svg,
 .bft-menu div:hover svg,
 .bft-menu-item:hover svg {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
+  color: var(--primary) !important;
+  stroke: var(--primary) !important;
+  filter: none !important;
 }
 
 /* Balkan FamilyTree Connection & Expand/Collapse Buttons */
