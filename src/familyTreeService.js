@@ -33,27 +33,27 @@ export class FamilyTreeService {
 
     // Name text (clipped within card)
     FamilyTree.templates.modernGlass.field_0 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="#ffffff" x="80" y="48">{val}</text>';
+      '<text clip-path="url(#textClip_{id})" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="#ffffff" x="80" y="34">{val}</text>';
 
     // Title / Relationship text (clipped)
     FamilyTree.templates.modernGlass.field_1 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 11px; font-weight: 500; font-family: Inter, sans-serif;" fill="#94a3b8" x="80" y="66">{val}</text>';
+      '<text clip-path="url(#textClip_{id})" style="font-size: 11px; font-weight: 500; font-family: Inter, sans-serif;" fill="#94a3b8" x="80" y="72">{val}</text>';
 
     // Birth Date text (clipped)
     FamilyTree.templates.modernGlass.field_2 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 10px; font-weight: 400; font-family: Inter, sans-serif;" fill="#64748b" x="80" y="83">{val}</text>';
+      '<text clip-path="url(#textClip_{id})" style="font-size: 10px; font-weight: 400; font-family: Inter, sans-serif;" fill="#64748b" x="80" y="88">{val}</text>';
 
-    // Custom male node accent & gender indicator badge
+    // Custom male node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
     FamilyTree.templates.modernGlass_male.node =
       '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card"></rect>' +
-      '<g transform="translate(80, 12)">' +
-        '<rect x="0" y="0" width="48" height="18" rx="9" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
-        '<text x="24" y="12" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">♂ Pria</text>' +
+      '<g transform="translate(80, 42)">' +
+        '<rect x="0" y="0" width="40" height="15" rx="7.5" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
+        '<text x="20" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">♂ Pria</text>' +
       '</g>' +
-      '<clipPath id="textClip_{id}"><rect x="80" y="34" width="132" height="70" /></clipPath>';
+      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="132" height="85" /></clipPath>';
 
-    // Custom female node accent & gender indicator badge
+    // Custom female node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
     FamilyTree.templates.modernGlass_female.img_0 =
       '<clipPath id="avatarClip_{id}">' +
@@ -64,11 +64,11 @@ export class FamilyTreeService {
 
     FamilyTree.templates.modernGlass_female.node =
       '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#db2777" stroke-width="1.5" class="ft-node-card"></rect>' +
-      '<g transform="translate(80, 12)">' +
-        '<rect x="0" y="0" width="58" height="18" rx="9" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
-        '<text x="29" y="12" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">♀ Wanita</text>' +
+      '<g transform="translate(80, 42)">' +
+        '<rect x="0" y="0" width="48" height="15" rx="7.5" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
+        '<text x="24" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">♀ Wanita</text>' +
       '</g>' +
-      '<clipPath id="textClip_{id}"><rect x="80" y="34" width="132" height="70" /></clipPath>';
+      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="132" height="85" /></clipPath>';
   }
 
   render(nodesData) {
