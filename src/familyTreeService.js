@@ -17,14 +17,14 @@ export class FamilyTreeService {
     // Node SVG background with smooth rounded corners and border
     FamilyTree.templates.modernGlass.node = 
       '<rect x="0" y="0" height="100" width="230" fill="#1e293b" rx="14" ry="14" stroke="#475569" stroke-width="1.5" class="ft-node-rect"></rect>' +
-      '<line x1="0" y1="0" x2="230" y2="0" stroke="#3b82f6" stroke-width="4" rx="2" class="ft-node-accent"></line>';
+      '<line x1="0" y1="0" x2="230" y2="0" stroke="#45A692" stroke-width="4" rx="2" class="ft-node-accent"></line>';
 
     // Image avatar configuration - Use node {id} for clipPath ID so it forms a valid SVG selector
     FamilyTree.templates.modernGlass.img_0 = 
       '<clipPath id="avatarClip_{id}">' +
         '<circle cx="42" cy="50" r="28"></circle>' +
       '</clipPath>' +
-      '<circle cx="42" cy="50" r="30" fill="#3b82f6" opacity="0.3"></circle>' +
+      '<circle cx="42" cy="50" r="30" fill="#45A692" opacity="0.3"></circle>' +
       '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="14" y="22" width="56" height="56"></image>';
 
     // Name text
@@ -42,8 +42,8 @@ export class FamilyTreeService {
     // Custom male & female node accents
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
     FamilyTree.templates.modernGlass_male.node = 
-      '<rect x="0" y="0" height="100" width="230" fill="#0f172a" rx="14" ry="14" stroke="#2563eb" stroke-width="1.5"></rect>' +
-      '<rect x="0" y="0" height="100" width="6" fill="#3b82f6" rx="3"></rect>';
+      '<rect x="0" y="0" height="100" width="230" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5"></rect>' +
+      '<rect x="0" y="0" height="100" width="6" fill="#45A692" rx="3"></rect>';
 
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
     FamilyTree.templates.modernGlass_female.node = 
