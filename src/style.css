@@ -604,41 +604,126 @@ textarea.form-control {
 }
 
 /* ==========================================================================
+   Hamburger Button (hidden on desktop, visible on mobile)
+   ========================================================================== */
+.btn-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+  z-index: 25;
+  transition: all 0.2s ease;
+}
+
+.btn-hamburger:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger → X animation when open */
+.btn-hamburger.active .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.btn-hamburger.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+.btn-hamburger.active .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Nav overlay (mobile only) */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 19;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ==========================================================================
    Responsive Media Queries for Mobile, Tablet, and Touch Devices
    ========================================================================== */
 @media (max-width: 900px) {
+  .btn-hamburger {
+    display: flex;
+  }
+
   .navbar {
     padding: 10px 16px;
     height: auto;
-    min-height: 60px;
-    flex-wrap: wrap;
+    min-height: 56px;
+    flex-wrap: nowrap;
     gap: 10px;
+    position: relative;
+  }
+
+  .nav-actions {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 270px;
+    height: 100vh;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--bg-sidebar);
+    backdrop-filter: var(--glass-blur);
+    border-left: 1px solid var(--border-color);
+    padding: 80px 20px 24px 20px;
+    gap: 8px;
+    z-index: 20;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+  }
+
+  .nav-actions.open {
+    right: 0;
+  }
+
+  .nav-actions .search-box {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .nav-actions .btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .nav-actions .btn .btn-text {
+    display: inline;
   }
 
   .brand {
     gap: 10px;
-  }
-
-  .nav-actions {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .nav-actions::-webkit-scrollbar {
-    display: none;
-  }
-
-  .search-box {
-    min-width: 160px;
-    flex-shrink: 0;
-  }
-
-  .btn {
-    flex-shrink: 0;
   }
 }
 
@@ -654,16 +739,6 @@ textarea.form-control {
   .brand-icon {
     width: 32px;
     height: 32px;
-  }
-
-  .btn {
-    padding: 7px 12px;
-    font-size: 12px;
-  }
-
-  /* Hide button text labels on very small mobile screens for clean compact icons */
-  .btn .btn-text {
-    display: none;
   }
 
   /* Slide-over sidebar takes full width on mobile devices */

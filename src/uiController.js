@@ -64,11 +64,32 @@ export class UIController {
     // Stats counter
     this.statTotalMembers = document.getElementById('statTotalMembers');
     this.statGenerations = document.getElementById('statGenerations');
+
+    // Hamburger menu
+    this.btnHamburger = document.getElementById('btnHamburger');
+    this.navActions = document.getElementById('navActions');
+    this.navOverlay = document.getElementById('navOverlay');
   }
 
   bindEvents() {
     // Lucide icons render
     createIcons({ icons });
+
+    // Hamburger menu toggle
+    if (this.btnHamburger) {
+      this.btnHamburger.addEventListener('click', () => this.toggleMobileMenu());
+    }
+    if (this.navOverlay) {
+      this.navOverlay.addEventListener('click', () => this.closeMobileMenu());
+    }
+    // Auto-close mobile menu when any nav button is clicked
+    if (this.navActions) {
+      this.navActions.addEventListener('click', (e) => {
+        if (e.target.closest('.btn')) {
+          this.closeMobileMenu();
+        }
+      });
+    }
 
     // Close detail panel
     if (this.btnCloseDetail) {
@@ -289,6 +310,20 @@ export class UIController {
   closeDetailPanel() {
     this.detailPanel.classList.remove('open');
     this.activeMemberId = null;
+  }
+
+  toggleMobileMenu() {
+    const isOpen = this.navActions.classList.toggle('open');
+    this.btnHamburger.classList.toggle('active', isOpen);
+    this.navOverlay.classList.toggle('active', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  closeMobileMenu() {
+    this.navActions.classList.remove('open');
+    this.btnHamburger.classList.remove('active');
+    this.navOverlay.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
   populateParentOptions(excludeId = null) {
