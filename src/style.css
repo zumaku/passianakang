@@ -382,6 +382,22 @@ g[data-ctrl-n-menu-id]:hover circle {
   color: #ffffff !important;
 }
 
+[data-ctrl-menu] div svg,
+.bft-menu div svg,
+.bft-menu-item svg {
+  color: var(--primary) !important;
+  stroke: var(--primary) !important;
+  flex-shrink: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-ctrl-menu] div:hover svg,
+.bft-menu div:hover svg,
+.bft-menu-item:hover svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
 /* Balkan FamilyTree Connection & Expand/Collapse Buttons */
 [data-btn-id] {
   cursor: pointer;

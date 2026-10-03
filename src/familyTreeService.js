@@ -136,15 +136,15 @@ export class FamilyTreeService {
       },
       nodeMenu: {
         details: {
-          text: '🔍 Lihat Detail',
+          text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Lihat Detail',
           onClick: (id) => this.triggerSelectNode(id)
         },
         edit: {
-          text: '✏️ Edit Data Anggota',
+          text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit Anggota',
           onClick: (id) => this.triggerEditNode(id)
         },
         add: {
-          text: '➕ Tambah Kerabat',
+          text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="16" x2="22" y1="11" y2="11"/></svg>Tambah Kerabat',
           onClick: (id) => this.triggerAddRelative(id)
         }
       },
