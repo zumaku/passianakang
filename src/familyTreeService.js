@@ -47,7 +47,6 @@ export class FamilyTreeService {
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
     FamilyTree.templates.modernGlass_male.node =
       '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card"></rect>' +
-      '<rect x="0" y="0" height="110" width="6" fill="#45A692" rx="3"></rect>' +
       '<g transform="translate(80, 12)">' +
         '<rect x="0" y="0" width="48" height="18" rx="9" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
         '<text x="24" y="12" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">♂ Pria</text>' +
@@ -65,7 +64,6 @@ export class FamilyTreeService {
 
     FamilyTree.templates.modernGlass_female.node =
       '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#db2777" stroke-width="1.5" class="ft-node-card"></rect>' +
-      '<rect x="0" y="0" height="110" width="6" fill="#ec4899" rx="3"></rect>' +
       '<g transform="translate(80, 12)">' +
         '<rect x="0" y="0" width="58" height="18" rx="9" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
         '<text x="29" y="12" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">♀ Wanita</text>' +
