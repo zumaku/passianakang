@@ -167,14 +167,26 @@ html, body {
 }
 
 /* Balkan FamilyTree JS Custom CSS Overrides */
-[data-n-id] rect {
+[data-n-id] rect.ft-node-card {
   transition: all 0.25s ease;
 }
 
-[data-n-id]:hover rect {
-  filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.6));
+[data-n-id]:hover rect.ft-node-card {
+  filter: drop-shadow(0 0 14px rgba(69, 166, 146, 0.45));
   stroke: var(--primary) !important;
   cursor: pointer;
+}
+
+g[data-ctrl-n-menu-id] rect.ft-menu-btn {
+  transition: all 0.2s ease;
+}
+
+g[data-ctrl-n-menu-id]:hover rect.ft-menu-btn {
+  fill: rgba(255, 255, 255, 0.22) !important;
+}
+
+g[data-ctrl-n-menu-id]:hover circle {
+  fill: #ffffff !important;
 }
 
 .balkan-family-tree .bft-button {
