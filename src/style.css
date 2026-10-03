@@ -507,12 +507,7 @@ body.theme-light [data-btn-id] circle[fill="#ffffff"] {
 }
 
 /* Main Canvas Area */
-.main-content,
-#treeCanvas,
-#treeCanvas > div,
-#treeCanvas svg,
-.bft-container,
-.bft {
+.main-content {
   flex: 1;
   position: relative;
   background-color: var(--bg-canvas) !important;
@@ -522,15 +517,23 @@ body.theme-light [data-btn-id] circle[fill="#ffffff"] {
   transition: background-color 0.3s ease;
 }
 
-body.theme-light .main-content,
-body.theme-light #treeCanvas,
-body.theme-light #treeCanvas > div,
-body.theme-light #treeCanvas svg,
-body.theme-light .bft-container,
-body.theme-light .bft {
+body.theme-light .main-content {
   background-color: #f1f5f9 !important;
   background-image: radial-gradient(rgba(15, 23, 42, 0.1) 1px, transparent 1px) !important;
   background-size: 24px 24px !important;
+}
+
+#treeCanvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-canvas) !important;
+}
+
+body.theme-light #treeCanvas,
+body.theme-light .bft-container,
+body.theme-light svg.bft {
+  background-color: #f1f5f9 !important;
 }
 
 /* Balkan inner background rect override */
