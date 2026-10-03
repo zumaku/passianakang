@@ -598,8 +598,14 @@ export class UIController {
     // Center tree & highlight node
     this.treeService.centerNode(member.id);
     
-    // Open detail panel
-    this.showMemberDetail(member);
+    // On mobile view (screen width <= 900px), do not open detail panel automatically
+    // so the highlighted node card & pulsing ring remain 100% visible on canvas
+    const isMobile = window.innerWidth <= 900;
+    if (!isMobile) {
+      this.showMemberDetail(member);
+    } else {
+      this.showToast(`Menampilkan "${member.name}" pada silsilah.`, 'info');
+    }
 
     // Close mobile menu if open
     this.closeMobileMenu();
