@@ -230,16 +230,26 @@ html, body {
   color: var(--text-muted);
 }
 
-@keyframes nodePulse {
-  0% { filter: drop-shadow(0 0 0px var(--primary)); }
-  50% { filter: drop-shadow(0 0 24px #45A692); }
-  100% { filter: drop-shadow(0 0 0px var(--primary)); }
+@keyframes nodePulseHighlight {
+  0% {
+    filter: drop-shadow(0 0 4px rgba(69, 166, 146, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 28px #45A692) drop-shadow(0 0 10px #ffffff);
+  }
+  100% {
+    filter: drop-shadow(0 0 8px rgba(69, 166, 146, 0.8));
+  }
 }
 
 .ft-node-highlight rect.ft-node-card {
-  animation: nodePulse 1s ease 2;
+  animation: nodePulseHighlight 0.8s ease-in-out 4;
+}
+
+[data-n-id].ft-node-active rect.ft-node-card {
   stroke: #45A692 !important;
-  stroke-width: 2.5px !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 16px rgba(69, 166, 146, 0.7));
 }
 
 /* Main Canvas Area */

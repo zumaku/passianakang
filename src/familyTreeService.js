@@ -241,12 +241,18 @@ export class FamilyTreeService {
     if (this.familyTree && id) {
       try {
         this.familyTree.center(id);
+
+        // Clear existing highlights
+        document.querySelectorAll('.ft-node-highlight, .ft-node-active').forEach(el => {
+          el.classList.remove('ft-node-highlight', 'ft-node-active');
+        });
+
         const nodeEl = this.familyTree.getNodeElement(id);
         if (nodeEl) {
-          nodeEl.classList.add('ft-node-highlight');
+          nodeEl.classList.add('ft-node-highlight', 'ft-node-active');
           setTimeout(() => {
             if (nodeEl) nodeEl.classList.remove('ft-node-highlight');
-          }, 2500);
+          }, 3200);
         }
       } catch (err) {
         console.warn('Could not center node:', err);
