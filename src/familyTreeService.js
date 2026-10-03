@@ -15,13 +15,15 @@ export class FamilyTreeService {
     FamilyTree.templates.modernGlass.size = [250, 110];
 
     // Three dots menu button (positioned top right)
-    FamilyTree.templates.modernGlass.menuButton =
-      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,216,10)" data-ctrl-n-menu-id="{id}">' +
-        '<rect x="0" y="0" width="24" height="26" rx="6" fill="rgba(255, 255, 255, 0.08)" class="ft-menu-btn"></rect>' +
-        '<circle cx="12" cy="6" r="2" fill="#cbd5e1"></circle>' +
-        '<circle cx="12" cy="13" r="2" fill="#cbd5e1"></circle>' +
-        '<circle cx="12" cy="20" r="2" fill="#cbd5e1"></circle>' +
+    const customMenuButton =
+      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,212,12)" data-ctrl-n-menu-id="{id}">' +
+        '<rect x="0" y="0" width="26" height="26" rx="7" fill="rgba(255, 255, 255, 0.08)" class="ft-menu-btn"></rect>' +
+        '<circle cx="13" cy="7" r="2" fill="#cbd5e1"></circle>' +
+        '<circle cx="13" cy="13" r="2" fill="#cbd5e1"></circle>' +
+        '<circle cx="13" cy="19" r="2" fill="#cbd5e1"></circle>' +
       '</g>';
+
+    FamilyTree.templates.modernGlass.menuButton = customMenuButton;
 
     // Image avatar configuration
     FamilyTree.templates.modernGlass.img_0 =
@@ -45,16 +47,18 @@ export class FamilyTreeService {
 
     // Custom male node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
+    FamilyTree.templates.modernGlass_male.menuButton = customMenuButton;
     FamilyTree.templates.modernGlass_male.node =
       '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card"></rect>' +
       '<g transform="translate(80, 42)">' +
         '<rect x="0" y="0" width="40" height="15" rx="7.5" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
         '<text x="20" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">♂ Pria</text>' +
       '</g>' +
-      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="132" height="85" /></clipPath>';
+      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="124" height="85" /></clipPath>';
 
     // Custom female node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
+    FamilyTree.templates.modernGlass_female.menuButton = customMenuButton;
     FamilyTree.templates.modernGlass_female.img_0 =
       '<clipPath id="avatarClip_{id}">' +
         '<circle cx="44" cy="55" r="26"></circle>' +
@@ -68,7 +72,7 @@ export class FamilyTreeService {
         '<rect x="0" y="0" width="48" height="15" rx="7.5" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
         '<text x="24" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">♀ Wanita</text>' +
       '</g>' +
-      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="132" height="85" /></clipPath>';
+      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="124" height="85" /></clipPath>';
   }
 
   render(nodesData) {
