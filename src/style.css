@@ -2,7 +2,12 @@
 
 :root {
   --bg-main: #0b0f17;
+  --bg-canvas: #0b0f17;
   --bg-card: rgba(30, 41, 59, 0.7);
+  --bg-node: #0f172a;
+  --node-text-name: #ffffff;
+  --node-text-title: #94a3b8;
+  --node-text-sub: #64748b;
   --bg-sidebar: rgba(15, 23, 42, 0.85);
   --bg-input: rgba(15, 23, 42, 0.6);
   --border-color: rgba(255, 255, 255, 0.1);
@@ -28,7 +33,12 @@
 /* Light Theme: Canvas, node cards, panels, sidebars, and modals all adapt seamlessly */
 body.theme-light {
   --bg-main: #f1f5f9; /* Clean light slate canvas background */
+  --bg-canvas: #f1f5f9;
   --bg-card: #ffffff; /* Bright white node cards */
+  --bg-node: #ffffff;
+  --node-text-name: #0f172a;
+  --node-text-title: #475569;
+  --node-text-sub: #64748b;
   --bg-sidebar: rgba(255, 255, 255, 0.95); /* Bright light glass panels */
   --bg-input: #e2e8f0; /* Light background for inputs */
   --border-color: rgba(0, 0, 0, 0.12); /* Subtle dark borders for light panels */
@@ -497,20 +507,42 @@ body.theme-light [data-btn-id] circle[fill="#ffffff"] {
 }
 
 /* Main Canvas Area */
-.main-content {
+.main-content,
+#treeCanvas,
+#treeCanvas > div,
+#treeCanvas svg,
+.bft-container,
+.bft {
   flex: 1;
   position: relative;
-  background-color: var(--bg-main);
+  background-color: var(--bg-canvas) !important;
   background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
   background-size: 24px 24px;
   overflow: hidden;
   transition: background-color 0.3s ease;
 }
 
-body.theme-light .main-content {
-  background-color: var(--bg-main);
-  background-image: radial-gradient(rgba(15, 23, 42, 0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
+body.theme-light .main-content,
+body.theme-light #treeCanvas,
+body.theme-light #treeCanvas > div,
+body.theme-light #treeCanvas svg,
+body.theme-light .bft-container,
+body.theme-light .bft {
+  background-color: #f1f5f9 !important;
+  background-image: radial-gradient(rgba(15, 23, 42, 0.1) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+/* Balkan inner background rect override */
+#treeCanvas svg > rect:first-child,
+#treeCanvas .bft-bg {
+  fill: var(--bg-canvas) !important;
+  transition: fill 0.3s ease;
+}
+
+body.theme-light #treeCanvas svg > rect:first-child,
+body.theme-light #treeCanvas .bft-bg {
+  fill: #f1f5f9 !important;
 }
 
 #treeCanvas {

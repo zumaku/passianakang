@@ -49,15 +49,15 @@ export class FamilyTreeService {
 
     // Name text (clipped within card)
     FamilyTree.templates.modernGlass.field_0 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="#ffffff" x="80" y="34">{val}</text>';
+      '<text clip-path="url(#textClip_{id})" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="var(--node-text-name, #ffffff)" class="ft-node-name" x="80" y="34">{val}</text>';
 
     // Title / Relationship text (clipped)
     FamilyTree.templates.modernGlass.field_1 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 11px; font-weight: 500; font-family: Inter, sans-serif;" fill="#94a3b8" x="80" y="72">{val}</text>';
+      '<text clip-path="url(#textClip_{id})" style="font-size: 11px; font-weight: 500; font-family: Inter, sans-serif;" fill="var(--node-text-title, #94a3b8)" class="ft-node-title" x="80" y="72">{val}</text>';
 
     // Birth Date text (clipped)
     FamilyTree.templates.modernGlass.field_2 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 10px; font-weight: 400; font-family: Inter, sans-serif;" fill="#64748b" x="80" y="88">{val}</text>';
+      '<text clip-path="url(#textClip_{id})" style="font-size: 10px; font-weight: 400; font-family: Inter, sans-serif;" fill="var(--node-text-sub, #64748b)" class="ft-node-birth" x="80" y="88">{val}</text>';
 
     // Custom male node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
@@ -65,7 +65,7 @@ export class FamilyTreeService {
     FamilyTree.templates.modernGlass_male.nodeMenuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.node =
-      '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card"></rect>' +
+      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card"></rect>' +
       '<g transform="translate(80, 42)">' +
         '<rect x="0" y="0" width="40" height="15" rx="7.5" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
         '<text x="20" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">♂ Pria</text>' +
@@ -85,7 +85,7 @@ export class FamilyTreeService {
       '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="18" y="29" width="52" height="52"></image>';
 
     FamilyTree.templates.modernGlass_female.node =
-      '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#db2777" stroke-width="1.5" class="ft-node-card"></rect>' +
+      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#db2777" stroke-width="1.5" class="ft-node-card"></rect>' +
       '<g transform="translate(80, 42)">' +
         '<rect x="0" y="0" width="48" height="15" rx="7.5" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
         '<text x="24" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">♀ Wanita</text>' +
