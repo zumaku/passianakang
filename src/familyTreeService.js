@@ -247,12 +247,16 @@ export class FamilyTreeService {
           el.classList.remove('ft-node-highlight', 'ft-node-active');
         });
 
-        const nodeEl = this.familyTree.getNodeElement(id);
+        let nodeEl = this.familyTree.getNodeElement(id);
+        if (!nodeEl) {
+          nodeEl = document.querySelector(`[data-n-id="${id}"]`);
+        }
+
         if (nodeEl) {
           nodeEl.classList.add('ft-node-highlight', 'ft-node-active');
           setTimeout(() => {
             if (nodeEl) nodeEl.classList.remove('ft-node-highlight');
-          }, 3200);
+          }, 4500);
         }
       } catch (err) {
         console.warn('Could not center node:', err);
