@@ -436,7 +436,10 @@ g[data-ctrl-n-menu-id]:hover circle {
 .bft-edit-form,
 [data-edit-form],
 .bft-form,
-.bft-search-form {
+.bft-search-form,
+.bft-img-button,
+.bft-watermark,
+.bft-logo {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
