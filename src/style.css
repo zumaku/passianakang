@@ -25,12 +25,12 @@
   --radius-lg: 20px;
 }
 
-/* Light Theme: Panels, header, sidebars, forms turn bright light glass, while canvas background & cards remain DARK as explicitly requested */
+/* Light Theme: Canvas, node cards, panels, sidebars, and modals all adapt seamlessly */
 body.theme-light {
-  --bg-main: #0b0f17; /* Canvas background STAYS DARK */
-  --bg-card: rgba(30, 41, 59, 0.7); /* Node cards STAY DARK */
-  --bg-sidebar: rgba(255, 255, 255, 0.94); /* Bright light glass panels */
-  --bg-input: #f1f5f9; /* Light background for inputs */
+  --bg-main: #f1f5f9; /* Clean light slate canvas background */
+  --bg-card: #ffffff; /* Bright white node cards */
+  --bg-sidebar: rgba(255, 255, 255, 0.95); /* Bright light glass panels */
+  --bg-input: #e2e8f0; /* Light background for inputs */
   --border-color: rgba(0, 0, 0, 0.12); /* Subtle dark borders for light panels */
   --border-focus: #2D7A68;
   
@@ -204,6 +204,99 @@ body.theme-light .search-item:hover {
 
 body.theme-light .modal-overlay {
   background: rgba(15, 23, 42, 0.6);
+}
+
+/* ==========================================================================
+   Light Theme: Family Tree Node Cards, Text, Badges, Links & Canvas Overrides
+   ========================================================================== */
+body.theme-light [data-n-id] rect.ft-node-card {
+  fill: #ffffff !important;
+  stroke-width: 1.8px !important;
+  filter: drop-shadow(0 6px 18px rgba(15, 23, 42, 0.08)) !important;
+}
+
+body.theme-light [data-n-id]:hover rect.ft-node-card {
+  filter: drop-shadow(0 8px 22px rgba(45, 122, 104, 0.3)) !important;
+  stroke: var(--primary) !important;
+}
+
+/* Card Text elements in Light Theme */
+body.theme-light [data-n-id] text {
+  fill: #0f172a;
+}
+
+body.theme-light [data-n-id] text[y="34"] {
+  fill: #0f172a !important; /* Member Name */
+}
+
+body.theme-light [data-n-id] text[y="72"] {
+  fill: #475569 !important; /* Member Title / Role */
+}
+
+body.theme-light [data-n-id] text[y="88"] {
+  fill: #64748b !important; /* Member Birth Date */
+}
+
+/* Gender Indicator Badges in Light Theme */
+body.theme-light [data-n-id] text[fill="#7AD4C0"] {
+  fill: #0d9488 !important; /* Male text */
+}
+
+body.theme-light [data-n-id] text[fill="#fbcfe8"] {
+  fill: #db2777 !important; /* Female text */
+}
+
+body.theme-light [data-n-id] rect[fill="rgba(69, 166, 146, 0.2)"] {
+  fill: rgba(13, 148, 136, 0.12) !important;
+  stroke: rgba(13, 148, 136, 0.35) !important;
+}
+
+body.theme-light [data-n-id] rect[fill="rgba(236, 72, 153, 0.2)"] {
+  fill: rgba(236, 72, 153, 0.12) !important;
+  stroke: rgba(236, 72, 153, 0.35) !important;
+}
+
+/* 3-Dots Menu Button on Card in Light Theme */
+body.theme-light g[data-ctrl-n-menu-id] rect.ft-menu-btn {
+  fill: rgba(15, 23, 42, 0.05) !important;
+  stroke: rgba(15, 23, 42, 0.14) !important;
+}
+
+body.theme-light g[data-ctrl-n-menu-id] circle {
+  fill: #475569 !important;
+}
+
+body.theme-light g[data-ctrl-n-menu-id]:hover rect.ft-menu-btn {
+  fill: rgba(45, 122, 104, 0.2) !important;
+  stroke: #2D7A68 !important;
+}
+
+body.theme-light g[data-ctrl-n-menu-id]:hover circle {
+  fill: #2D7A68 !important;
+}
+
+/* Connection Lines in Light Theme */
+body.theme-light path[data-l-id],
+body.theme-light .bft-link,
+body.theme-light [data-l-id] {
+  stroke: #94a3b8 !important;
+  stroke-width: 2px !important;
+}
+
+/* Up / Expand Connection Button in Light Theme */
+body.theme-light [data-btn-id] circle.ft-up-btn {
+  fill: #ffffff !important;
+  stroke: #2D7A68 !important;
+}
+
+body.theme-light [data-btn-id] path,
+body.theme-light [data-btn-id] line {
+  stroke: #2D7A68 !important;
+}
+
+body.theme-light [data-btn-id] circle[fill="#ffffff"] {
+  fill: #2D7A68 !important;
+  stroke: #2D7A68 !important;
 }
 
 .brand-subtitle {
@@ -407,8 +500,17 @@ body.theme-light .modal-overlay {
 .main-content {
   flex: 1;
   position: relative;
-  background: rgba(15, 23, 42, 0.95);
+  background-color: var(--bg-main);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
   overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+body.theme-light .main-content {
+  background-color: var(--bg-main);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.1) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 #treeCanvas {
