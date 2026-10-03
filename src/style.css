@@ -25,6 +25,28 @@
   --radius-lg: 20px;
 }
 
+/* Light Theme: Panels, header, sidebars, forms turn bright light glass, while canvas background & cards remain DARK as explicitly requested */
+body.theme-light {
+  --bg-main: #0b0f17; /* Canvas background STAYS DARK */
+  --bg-card: rgba(30, 41, 59, 0.7); /* Node cards STAY DARK */
+  --bg-sidebar: rgba(255, 255, 255, 0.94); /* Bright light glass panels */
+  --bg-input: #f1f5f9; /* Light background for inputs */
+  --border-color: rgba(0, 0, 0, 0.12); /* Subtle dark borders for light panels */
+  --border-focus: #2D7A68;
+  
+  --primary: #2D7A68;
+  --primary-hover: #1f5649;
+  --primary-glow: rgba(45, 122, 104, 0.25);
+  --secondary: #db2777;
+  --accent: #1e5246;
+  
+  --text-main: #0f172a; /* High contrast dark text for light panels */
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -93,8 +115,95 @@ html, body {
   font-family: 'Outfit', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-main);
   letter-spacing: -0.5px;
+}
+
+/* Navbar Right Controls (Theme Toggle & Hamburger) */
+.navbar-right-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  z-index: 25;
+}
+
+.theme-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: #f59e0b; /* Amber/gold sun icon */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.06);
+}
+
+.theme-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.2;
+}
+
+body.theme-light .theme-toggle-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #6366f1; /* Indigo moon icon */
+}
+
+body.theme-light .theme-toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Light theme element overrides */
+body.theme-light .btn-secondary {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--text-main);
+}
+
+body.theme-light .btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .icon-btn {
+  color: var(--text-muted);
+}
+
+body.theme-light .icon-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-main);
+}
+
+body.theme-light .info-group,
+body.theme-light .relation-item {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .relation-item:hover {
+  background: rgba(45, 122, 104, 0.12);
+  border-color: var(--primary);
+}
+
+body.theme-light .search-item {
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+body.theme-light .search-item:hover {
+  background: rgba(45, 122, 104, 0.12);
+}
+
+body.theme-light .modal-overlay {
+  background: rgba(15, 23, 42, 0.6);
 }
 
 .brand-subtitle {

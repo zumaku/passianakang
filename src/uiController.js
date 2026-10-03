@@ -66,7 +66,8 @@ export class UIController {
     this.statTotalMembers = document.getElementById('statTotalMembers');
     this.statGenerations = document.getElementById('statGenerations');
 
-    // Hamburger menu
+    // Hamburger menu & Theme Toggle
+    this.btnThemeToggle = document.getElementById('btnThemeToggle');
     this.btnHamburger = document.getElementById('btnHamburger');
     this.btnCloseDrawer = document.getElementById('btnCloseDrawer');
     this.navActions = document.getElementById('navActions');
@@ -76,6 +77,12 @@ export class UIController {
   bindEvents() {
     // Lucide icons render
     createIcons({ icons });
+
+    // Theme toggle init and bind
+    this.initTheme();
+    if (this.btnThemeToggle) {
+      this.btnThemeToggle.addEventListener('click', () => this.toggleTheme());
+    }
 
     // Hamburger menu toggle
     if (this.btnHamburger) {
@@ -602,5 +609,34 @@ export class UIController {
     if (this.searchResults) {
       this.searchResults.classList.remove('active');
     }
+  }
+
+  initTheme() {
+    const savedTheme = localStorage.getItem('passianakang_theme') || 'dark';
+    this.applyTheme(savedTheme);
+  }
+
+  toggleTheme() {
+    const currentIsLight = document.body.classList.contains('theme-light');
+    const newTheme = currentIsLight ? 'dark' : 'light';
+    this.applyTheme(newTheme);
+    localStorage.setItem('passianakang_theme', newTheme);
+    this.showToast(`Beralih ke Tema ${newTheme === 'light' ? 'Terang' : 'Gelap'}`, 'info');
+  }
+
+  applyTheme(theme) {
+    const isLight = theme === 'light';
+    if (isLight) {
+      document.body.classList.add('theme-light');
+    } else {
+      document.body.classList.remove('theme-light');
+    }
+
+    // Toggle theme icons
+    const sunIcon = document.getElementById('themeIconSun');
+    const moonIcon = document.getElementById('themeIconMoon');
+    
+    if (sunIcon) sunIcon.style.display = isLight ? 'none' : 'block';
+    if (moonIcon) moonIcon.style.display = isLight ? 'block' : 'none';
   }
 }
