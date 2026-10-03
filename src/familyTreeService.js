@@ -16,11 +16,11 @@ export class FamilyTreeService {
 
     // Three dots menu button (positioned top right)
     const customNodeMenuButton =
-      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,212,12)" data-ctrl-n-menu-id="{id}">' +
-        '<rect x="0" y="0" width="26" height="26" rx="7" fill="rgba(255, 255, 255, 0.1)" class="ft-menu-btn"></rect>' +
-        '<circle cx="13" cy="7" r="2" fill="#cbd5e1"></circle>' +
-        '<circle cx="13" cy="13" r="2" fill="#cbd5e1"></circle>' +
-        '<circle cx="13" cy="19" r="2" fill="#cbd5e1"></circle>' +
+      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,210,10)" data-ctrl-n-menu-id="{id}">' +
+        '<rect x="0" y="0" width="28" height="28" rx="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" class="ft-menu-btn"></rect>' +
+        '<circle cx="14" cy="7" r="2.2" fill="#cbd5e1"></circle>' +
+        '<circle cx="14" cy="14" r="2.2" fill="#cbd5e1"></circle>' +
+        '<circle cx="14" cy="21" r="2.2" fill="#cbd5e1"></circle>' +
       '</g>';
 
     // Up / expand tree connection button (Treemap / Hierarchy Icon)

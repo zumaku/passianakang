@@ -318,16 +318,68 @@ html, body {
   cursor: pointer;
 }
 
+/* Custom 3-Dots Option Button on Card */
+g[data-ctrl-n-menu-id] {
+  cursor: pointer;
+}
+
 g[data-ctrl-n-menu-id] rect.ft-menu-btn {
-  transition: all 0.2s ease;
+  fill: rgba(255, 255, 255, 0.08) !important;
+  stroke: rgba(255, 255, 255, 0.16) !important;
+  stroke-width: 1px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+g[data-ctrl-n-menu-id] circle {
+  fill: #cbd5e1 !important;
+  transition: all 0.25s ease;
 }
 
 g[data-ctrl-n-menu-id]:hover rect.ft-menu-btn {
-  fill: rgba(255, 255, 255, 0.22) !important;
+  fill: rgba(69, 166, 146, 0.35) !important;
+  stroke: #45A692 !important;
+  filter: drop-shadow(0 0 8px rgba(69, 166, 146, 0.6));
 }
 
 g[data-ctrl-n-menu-id]:hover circle {
   fill: #ffffff !important;
+}
+
+/* Balkan Node Popup Option Menu Glassmorphism Styling */
+[data-ctrl-menu],
+.bft-node-menu,
+.bft-menu {
+  background: var(--bg-sidebar) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 6px !important;
+  z-index: 100 !important;
+}
+
+[data-ctrl-menu] div,
+.bft-menu div,
+.bft-menu-item {
+  color: var(--text-main) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 9px 16px !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+[data-ctrl-menu] div:hover,
+.bft-menu div:hover,
+.bft-menu-item:hover {
+  background: rgba(69, 166, 146, 0.25) !important;
+  color: #ffffff !important;
 }
 
 /* Balkan FamilyTree Connection & Expand/Collapse Buttons */
