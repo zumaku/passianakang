@@ -158,8 +158,36 @@ export class FamilyTreeService {
       editForm: null // Disable built-in Balkan edit form to prevent overlapping sidebars
     });
 
+    // Explicit capture-phase listener for 3-dots option button to guarantee menu popup
+    if (this.container) {
+      this.container.addEventListener('click', (e) => {
+        const menuBtn = e.target.closest('[data-ctrl-n-menu-id]') || e.target.closest('.ft-menu-btn');
+        if (menuBtn && this.familyTree) {
+          const nodeId = menuBtn.getAttribute('data-ctrl-n-menu-id');
+          if (nodeId && this.familyTree.nodeMenuUI) {
+            e.stopPropagation();
+            e.preventDefault();
+            this.familyTree.nodeMenuUI.showStickIn(menuBtn, nodeId, null, nodeMenuConfig);
+          }
+        }
+      }, true);
+    }
+
     // Handle node click event - return false to cancel Balkan built-in sidebar popup
     this.familyTree.onNodeClick((args) => {
+      // Ignore click if 3-dots menu button or expand button was clicked
+      if (args.event && args.event.target) {
+        const target = args.event.target;
+        if (
+          target.closest('[data-ctrl-n-menu-id]') ||
+          target.closest('.ft-menu-btn') ||
+          target.closest('[data-btn-id]') ||
+          target.closest('.ft-up-btn')
+        ) {
+          return false;
+        }
+      }
+
       if (this.onNodeSelectedCallback) {
         const node = this.getNodeById(args.node.id);
         this.onNodeSelectedCallback(node);
