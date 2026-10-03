@@ -26,5 +26,5 @@ document.addEventListener('DOMContentLoaded', () => {
   ui.setData(initialData);
   treeService.render(initialData);
 
-  console.log('Passiana Kang FamilyTree App successfully initialized.');
+  console.log('Passianakang FamilyTree App successfully initialized.');
 });

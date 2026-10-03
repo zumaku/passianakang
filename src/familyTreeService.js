@@ -209,8 +209,8 @@ export class FamilyTreeService {
       this.familyTree.exportPDF({
         filename: 'silsilah_keluarga.pdf',
         format: 'A4',
-        header: 'Silsilah Keluarga - Passiana Kang',
-        footer: 'Dibuat dengan Passiana Kang FamilyTree.js'
+        header: 'Silsilah Keluarga - Passianakang',
+        footer: 'Dibuat dengan Passianakang FamilyTree.js'
       });
     }
   }
