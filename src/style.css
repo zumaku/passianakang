@@ -599,3 +599,120 @@ textarea.form-control {
   from { opacity: 0; transform: translateX(30px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* ==========================================================================
+   Responsive Media Queries for Mobile, Tablet, and Touch Devices
+   ========================================================================== */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 10px 16px;
+    height: auto;
+    min-height: 60px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .nav-actions {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  .search-box {
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+
+  .btn {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-title {
+    font-size: 16px;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+
+  /* Hide button text labels on very small mobile screens for clean compact icons */
+  .btn .btn-text {
+    display: none;
+  }
+
+  /* Slide-over sidebar takes full width on mobile devices */
+  .detail-panel {
+    width: 100%;
+    right: -100%;
+    border-left: none;
+  }
+
+  .detail-panel.open {
+    right: 0;
+  }
+
+  /* Modal Form responsive 1-column layout */
+  .modal-container {
+    width: 94%;
+    max-height: 88vh;
+    border-radius: var(--radius-md);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  .modal-header, 
+  .modal-body, 
+  .modal-footer {
+    padding: 14px 16px;
+  }
+
+  /* Floating zoom controls on mobile */
+  .floating-controls {
+    bottom: 16px;
+    left: 16px;
+  }
+
+  /* Toast notifications centered on mobile */
+  .toast-container {
+    top: 64px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .toast {
+    width: 100%;
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+}
+
