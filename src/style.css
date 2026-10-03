@@ -878,8 +878,31 @@ textarea.form-control {
 
   /* Floating zoom controls on mobile */
   .floating-controls {
-    bottom: 16px;
-    left: 16px;
+    bottom: 14px;
+    left: 14px;
+    gap: 6px;
+  }
+
+  .floating-controls .control-group {
+    padding: 3px;
+    gap: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .floating-controls .icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+  }
+
+  .floating-controls .icon-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .floating-controls .control-group:last-child {
+    padding: 4px 8px !important;
+    font-size: 10px !important;
   }
 
   /* Toast notifications centered on mobile */
