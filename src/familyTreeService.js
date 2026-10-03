@@ -224,7 +224,33 @@ export class FamilyTreeService {
 
   search(query) {
     if (this.familyTree && query) {
-      this.familyTree.search(query);
+      try {
+        const results = this.familyTree.search(query);
+        if (results && results.length > 0) {
+          this.centerNode(results[0]);
+        }
+        return results;
+      } catch (err) {
+        console.warn('Search error:', err);
+      }
+    }
+    return [];
+  }
+
+  centerNode(id) {
+    if (this.familyTree && id) {
+      try {
+        this.familyTree.center(id);
+        const nodeEl = this.familyTree.getNodeElement(id);
+        if (nodeEl) {
+          nodeEl.classList.add('ft-node-highlight');
+          setTimeout(() => {
+            if (nodeEl) nodeEl.classList.remove('ft-node-highlight');
+          }, 2500);
+        }
+      } catch (err) {
+        console.warn('Could not center node:', err);
+      }
     }
   }
 

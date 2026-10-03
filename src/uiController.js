@@ -60,6 +60,7 @@ export class UIController {
     this.btnExportPDF = document.getElementById('btnExportPDF');
     this.fileInputJSON = document.getElementById('fileInputJSON');
     this.searchInput = document.getElementById('searchInput');
+    this.searchResults = document.getElementById('searchResults');
 
     // Stats counter
     this.statTotalMembers = document.getElementById('statTotalMembers');
@@ -146,11 +147,32 @@ export class UIController {
       });
     }
 
-    // Search bar
-    if (this.searchInput) {
+    // Search bar & dropdown
+    if (this.searchInput && this.searchResults) {
       this.searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
-        this.treeService.search(query);
+        this.handleSearchInput(query);
+      });
+
+      this.searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const query = this.searchInput.value.trim();
+          if (query && this.currentData.length > 0) {
+            const match = this.currentData.find(m => 
+              m.name.toLowerCase().includes(query.toLowerCase())
+            );
+            if (match) {
+              this.selectSearchResult(match);
+            }
+          }
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-box')) {
+          this.closeSearchResults();
+        }
       });
     }
 
@@ -511,5 +533,74 @@ export class UIController {
     setTimeout(() => {
       if (toast.parentNode) toast.remove();
     }, 4000);
+  }
+
+  handleSearchInput(query) {
+    if (!query) {
+      this.closeSearchResults();
+      return;
+    }
+
+    const q = query.toLowerCase();
+    const matches = this.currentData.filter(m => 
+      (m.name && m.name.toLowerCase().includes(q)) ||
+      (m.title && m.title.toLowerCase().includes(q)) ||
+      (m.job && m.job.toLowerCase().includes(q))
+    );
+
+    this.renderSearchResults(matches);
+  }
+
+  renderSearchResults(matches) {
+    if (!this.searchResults) return;
+    this.searchResults.innerHTML = '';
+
+    if (matches.length === 0) {
+      this.searchResults.innerHTML = '<div class="search-no-results">Tidak ada anggota yang cocok</div>';
+      this.searchResults.classList.add('active');
+      return;
+    }
+
+    matches.slice(0, 8).forEach(member => {
+      const defaultAvatar = member.gender === 'female' 
+        ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+        : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+
+      const item = document.createElement('div');
+      item.className = 'search-item';
+      item.innerHTML = `
+        <img src="${member.img || defaultAvatar}" class="search-item-avatar" alt="${member.name}" />
+        <div class="search-item-info">
+          <span class="search-item-name">${member.name}</span>
+          <span class="search-item-title">${member.title || (member.gender === 'female' ? 'Wanita' : 'Pria')}</span>
+        </div>
+      `;
+
+      item.addEventListener('click', () => this.selectSearchResult(member));
+      this.searchResults.appendChild(item);
+    });
+
+    this.searchResults.classList.add('active');
+  }
+
+  selectSearchResult(member) {
+    if (!member) return;
+    this.closeSearchResults();
+    if (this.searchInput) this.searchInput.value = member.name;
+    
+    // Center tree & highlight node
+    this.treeService.centerNode(member.id);
+    
+    // Open detail panel
+    this.showMemberDetail(member);
+
+    // Close mobile menu if open
+    this.closeMobileMenu();
+  }
+
+  closeSearchResults() {
+    if (this.searchResults) {
+      this.searchResults.classList.remove('active');
+    }
   }
 }
