@@ -23,6 +23,14 @@ export class FamilyTreeService {
         '<circle cx="13" cy="19" r="2" fill="#cbd5e1"></circle>' +
       '</g>';
 
+    // Up / expand tree connection button
+    const customUpButton =
+      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,113,-12)" data-btn-id="{id}">' +
+        '<circle cx="12" cy="12" r="13" fill="#0f172a" stroke="#45A692" stroke-width="2" class="ft-up-btn"></circle>' +
+        '<path d="M7 14 L12 9 L17 14" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>' +
+      '</g>';
+
+    FamilyTree.templates.modernGlass.up = customUpButton;
     FamilyTree.templates.modernGlass.nodeMenuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass.menuButton = customNodeMenuButton;
 
@@ -48,6 +56,7 @@ export class FamilyTreeService {
 
     // Custom male node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
+    FamilyTree.templates.modernGlass_male.up = customUpButton;
     FamilyTree.templates.modernGlass_male.nodeMenuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.node =
@@ -60,6 +69,7 @@ export class FamilyTreeService {
 
     // Custom female node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
+    FamilyTree.templates.modernGlass_female.up = customUpButton;
     FamilyTree.templates.modernGlass_female.nodeMenuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_female.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_female.img_0 =

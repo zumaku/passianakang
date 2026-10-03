@@ -189,8 +189,37 @@ g[data-ctrl-n-menu-id]:hover circle {
   fill: #ffffff !important;
 }
 
-.balkan-family-tree .bft-button {
-  fill: #94a3b8 !important;
+/* Balkan FamilyTree Connection & Expand/Collapse Buttons */
+[data-btn-id] {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+}
+
+[data-btn-id]:hover {
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+[data-btn-id] circle,
+.bft-button circle {
+  fill: #0f172a !important;
+  stroke: #45A692 !important;
+  stroke-width: 2px !important;
+  transition: all 0.2s ease;
+}
+
+[data-btn-id]:hover circle,
+.bft-button:hover circle {
+  fill: #45A692 !important;
+  stroke: #ffffff !important;
+}
+
+[data-btn-id] path,
+[data-btn-id] line,
+.bft-button path,
+.bft-button line {
+  stroke: #ffffff !important;
+  transition: all 0.2s ease;
 }
 
 /* Hide Balkan FamilyTree built-in edit form elements to prevent overlapping sidebars */
