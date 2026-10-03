@@ -529,17 +529,30 @@ export class UIController {
 
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
+    
+    let iconName = 'info';
+    if (type === 'success') iconName = 'check-circle';
+    if (type === 'error') iconName = 'alert-circle';
+
     toast.innerHTML = `
-      <span>${message}</span>
-      <button class="toast-close">&times;</button>
+      <div class="toast-content">
+        <i data-lucide="${iconName}" class="toast-type-icon"></i>
+        <span class="toast-message">${message}</span>
+      </div>
+      <button class="toast-close" aria-label="Tutup notifikasi" title="Tutup">
+        <i data-lucide="x"></i>
+      </button>
     `;
 
     toast.querySelector('.toast-close').addEventListener('click', () => toast.remove());
     toastContainer.appendChild(toast);
+    
+    // Render Lucide SVG icons inside the new toast
+    createIcons({ icons });
 
     setTimeout(() => {
       if (toast.parentNode) toast.remove();
-    }, 4000);
+    }, 4500);
   }
 
   handleSearchInput(query) {
