@@ -76,7 +76,7 @@ export class FamilyTreeService {
       nodes: processedNodes,
       template: 'modernGlass',
       mouseScrool: FamilyTree.action.zoom,
-      enableSearch: true,
+      enableSearch: false,
       scaleInitial: FamilyTree.match.boundary,
       nodeBinding: {
         field_0: 'name',
