@@ -15,15 +15,16 @@ export class FamilyTreeService {
     FamilyTree.templates.modernGlass.size = [250, 110];
 
     // Three dots menu button (positioned top right)
-    const customMenuButton =
+    const customNodeMenuButton =
       '<g style="cursor:pointer;" transform="matrix(1,0,0,1,212,12)" data-ctrl-n-menu-id="{id}">' +
-        '<rect x="0" y="0" width="26" height="26" rx="7" fill="rgba(255, 255, 255, 0.08)" class="ft-menu-btn"></rect>' +
+        '<rect x="0" y="0" width="26" height="26" rx="7" fill="rgba(255, 255, 255, 0.1)" class="ft-menu-btn"></rect>' +
         '<circle cx="13" cy="7" r="2" fill="#cbd5e1"></circle>' +
         '<circle cx="13" cy="13" r="2" fill="#cbd5e1"></circle>' +
         '<circle cx="13" cy="19" r="2" fill="#cbd5e1"></circle>' +
       '</g>';
 
-    FamilyTree.templates.modernGlass.menuButton = customMenuButton;
+    FamilyTree.templates.modernGlass.nodeMenuButton = customNodeMenuButton;
+    FamilyTree.templates.modernGlass.menuButton = customNodeMenuButton;
 
     // Image avatar configuration
     FamilyTree.templates.modernGlass.img_0 =
@@ -47,7 +48,8 @@ export class FamilyTreeService {
 
     // Custom male node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
-    FamilyTree.templates.modernGlass_male.menuButton = customMenuButton;
+    FamilyTree.templates.modernGlass_male.nodeMenuButton = customNodeMenuButton;
+    FamilyTree.templates.modernGlass_male.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.node =
       '<rect x="0" y="0" height="110" width="250" fill="#0f172a" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card"></rect>' +
       '<g transform="translate(80, 42)">' +
@@ -58,7 +60,8 @@ export class FamilyTreeService {
 
     // Custom female node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
-    FamilyTree.templates.modernGlass_female.menuButton = customMenuButton;
+    FamilyTree.templates.modernGlass_female.nodeMenuButton = customNodeMenuButton;
+    FamilyTree.templates.modernGlass_female.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_female.img_0 =
       '<clipPath id="avatarClip_{id}">' +
         '<circle cx="44" cy="55" r="26"></circle>' +
