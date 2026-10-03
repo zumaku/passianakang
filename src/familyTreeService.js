@@ -23,11 +23,16 @@ export class FamilyTreeService {
         '<circle cx="13" cy="19" r="2" fill="#cbd5e1"></circle>' +
       '</g>';
 
-    // Up / expand tree connection button
+    // Up / expand tree connection button (Treemap / Hierarchy Icon)
     const customUpButton =
-      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,113,-12)" data-btn-id="{id}">' +
-        '<circle cx="12" cy="12" r="13" fill="#0f172a" stroke="#45A692" stroke-width="2" class="ft-up-btn"></circle>' +
-        '<path d="M7 14 L12 9 L17 14" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>' +
+      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,111,-14)" data-btn-id="{id}">' +
+        '<circle cx="14" cy="14" r="14" fill="#0f172a" stroke="#45A692" stroke-width="2" class="ft-up-btn"></circle>' +
+        '<g fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M14 10v4M9 14h10M9 14v4M19 14v4"/>' +
+          '<circle cx="14" cy="8" r="2" fill="#45A692" stroke="#45A692"/>' +
+          '<circle cx="9" cy="20" r="1.8" fill="#ffffff" stroke="#ffffff"/>' +
+          '<circle cx="19" cy="20" r="1.8" fill="#ffffff" stroke="#ffffff"/>' +
+        '</g>' +
       '</g>';
 
     FamilyTree.templates.modernGlass.up = customUpButton;
