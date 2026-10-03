@@ -207,18 +207,20 @@ g[data-ctrl-n-menu-id]:hover circle {
 
 /* Floating Controls Bar */
 .floating-controls {
-  position: absolute;
+  position: fixed;
   bottom: 24px;
   left: 24px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  z-index: 5;
+  z-index: 22;
+  pointer-events: auto;
 }
 
 .control-group {
   background: var(--bg-sidebar);
   backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 6px;
@@ -232,14 +234,20 @@ g[data-ctrl-n-menu-id]:hover circle {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
 }
 
 .icon-btn:hover {
