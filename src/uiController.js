@@ -67,6 +67,7 @@ export class UIController {
 
     // Hamburger menu
     this.btnHamburger = document.getElementById('btnHamburger');
+    this.btnCloseDrawer = document.getElementById('btnCloseDrawer');
     this.navActions = document.getElementById('navActions');
     this.navOverlay = document.getElementById('navOverlay');
   }
@@ -78,6 +79,9 @@ export class UIController {
     // Hamburger menu toggle
     if (this.btnHamburger) {
       this.btnHamburger.addEventListener('click', () => this.toggleMobileMenu());
+    }
+    if (this.btnCloseDrawer) {
+      this.btnCloseDrawer.addEventListener('click', () => this.closeMobileMenu());
     }
     if (this.navOverlay) {
       this.navOverlay.addEventListener('click', () => this.closeMobileMenu());

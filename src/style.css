@@ -31,13 +31,15 @@
   padding: 0;
 }
 
-body {
+html, body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
   overflow: hidden;
+  overflow-x: hidden !important;
   height: 100vh;
   width: 100vw;
+  max-width: 100vw;
 }
 
 /* App Container Layout */
@@ -46,7 +48,9 @@ body {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+  max-width: 100vw;
   position: relative;
+  overflow-x: hidden !important;
 }
 
 /* Header Navbar */
@@ -102,7 +106,19 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+}
+
+.drawer-header,
+.menu-label {
+  display: none;
+}
+
+.nav-menu-group,
+.action-grid {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Search Box */
@@ -267,23 +283,26 @@ body {
 
 /* Detail Sidebar Panel (Slide-Over) */
 .detail-panel {
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: -380px;
+  right: 0;
   width: 360px;
-  height: 100%;
+  max-width: 100vw;
+  height: 100vh;
   background: var(--bg-sidebar);
   backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border-left: 1px solid var(--border-color);
   box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-  z-index: 20;
-  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 25;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
 
 .detail-panel.open {
-  right: 0;
+  transform: translateX(0);
 }
 
 .panel-header {
@@ -656,8 +675,10 @@ textarea.form-control {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 19;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 28;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -677,33 +698,84 @@ textarea.form-control {
 
   .navbar {
     padding: 10px 16px;
-    height: auto;
-    min-height: 56px;
-    flex-wrap: nowrap;
-    gap: 10px;
+    height: 58px;
     position: relative;
+  }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 4px;
+  }
+
+  .drawer-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .drawer-close-btn {
+    font-size: 22px;
+    color: var(--text-muted);
+  }
+
+  .menu-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-subtle);
+    margin-bottom: 6px;
+  }
+
+  .nav-menu-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .action-grid .btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .nav-actions {
     position: fixed;
     top: 0;
-    right: -280px;
-    width: 270px;
+    right: 0;
+    width: 290px;
+    max-width: 85vw;
     height: 100vh;
+    height: 100dvh;
     flex-direction: column;
     align-items: stretch;
     background: var(--bg-sidebar);
     backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     border-left: 1px solid var(--border-color);
-    padding: 80px 20px 24px 20px;
-    gap: 8px;
-    z-index: 20;
+    padding: 20px;
+    gap: 16px;
+    z-index: 30;
     overflow-y: auto;
-    transition: right 0.3s ease;
+    overflow-x: hidden;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
   }
 
   .nav-actions.open {
-    right: 0;
+    transform: translateX(0);
   }
 
   .nav-actions .search-box {
@@ -718,8 +790,8 @@ textarea.form-control {
     font-size: 13px;
   }
 
-  .nav-actions .btn .btn-text {
-    display: inline;
+  .nav-actions .btn-reset {
+    margin-top: 8px;
   }
 
   .brand {
@@ -744,12 +816,14 @@ textarea.form-control {
   /* Slide-over sidebar takes full width on mobile devices */
   .detail-panel {
     width: 100%;
-    right: -100%;
+    max-width: 100vw;
+    right: 0;
+    transform: translateX(100%);
     border-left: none;
   }
 
   .detail-panel.open {
-    right: 0;
+    transform: translateX(0);
   }
 
   /* Modal Form responsive 1-column layout */
