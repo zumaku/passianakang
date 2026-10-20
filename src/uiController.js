@@ -36,12 +36,14 @@ export class UIController {
     this.btnDeleteMember = document.getElementById('btnDeleteMember');
     this.btnCloseDetail = document.getElementById('btnCloseDetail');
 
-    // Modals
+    // Modals & Tabs
     this.memberModal = document.getElementById('memberModal');
     this.memberModalTitle = document.getElementById('memberModalTitle');
     this.memberForm = document.getElementById('memberForm');
     this.btnCloseModal = document.getElementById('btnCloseModal');
     this.btnCancelForm = document.getElementById('btnCancelForm');
+    this.modalTabBtns = document.querySelectorAll('.modal-tab-btn');
+    this.modalTabPanes = document.querySelectorAll('.modal-tab-pane');
 
     // Form inputs
     this.inputId = document.getElementById('memberId');
@@ -175,6 +177,15 @@ export class UIController {
     // Close detail panel
     if (this.btnCloseDetail) {
       this.btnCloseDetail.addEventListener('click', () => this.closeDetailPanel());
+    }
+
+    // Member Modal Segmented Tabs
+    if (this.modalTabBtns) {
+      this.modalTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          this.switchMemberTab(btn.dataset.tab);
+        });
+      });
     }
 
     // Modal controls
@@ -573,9 +584,23 @@ export class UIController {
     if (this.customSelectSpouse) this.customSelectSpouse.setOptions(spouseMembers, 'Belum Menikah');
   }
 
+  switchMemberTab(tabId) {
+    if (!this.modalTabBtns || !this.modalTabPanes) return;
+    this.modalTabBtns.forEach(btn => {
+      const isActive = btn.dataset.tab === tabId;
+      btn.classList.toggle('active', isActive);
+    });
+    this.modalTabPanes.forEach(pane => {
+      const isActive = pane.id === tabId;
+      pane.classList.toggle('active', isActive);
+    });
+    createIcons({ icons });
+  }
+
   openAddMemberModal() {
     this.memberModalTitle.textContent = 'Tambah Anggota Keluarga Baru';
     this.memberForm.reset();
+    this.switchMemberTab('tabProfile');
     this.inputId.value = '';
     this.populateParentOptions();
     if (this.customSelectGender) this.customSelectGender.setValue('male');
@@ -614,6 +639,7 @@ export class UIController {
 
     this.memberModalTitle.textContent = `Edit Data ${member.name}`;
     this.populateParentOptions(member.id);
+    this.switchMemberTab('tabProfile');
 
     this.inputId.value = member.id;
     this.inputName.value = member.name || '';
@@ -728,6 +754,8 @@ export class UIController {
     const id = this.inputId.value ? this.inputId.value : String(Date.now());
     const name = this.inputName.value.trim();
     if (!name) {
+      this.switchMemberTab('tabProfile');
+      if (this.inputName) this.inputName.focus();
       this.showToast('Nama anggota tidak boleh kosong!', 'error');
       return;
     }

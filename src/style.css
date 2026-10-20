@@ -1149,6 +1149,11 @@ body.theme-light #btnCloseDetail:hover {
   animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+#memberModal .modal-container {
+  height: 590px;
+  max-height: 88vh;
+}
+
 @keyframes modalSlide {
   from { transform: translateY(20px) scale(0.96); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
@@ -1174,6 +1179,151 @@ body.theme-light #btnCloseDetail:hover {
   flex: 1;
   min-height: 0;
   overflow: hidden;
+}
+
+/* ==========================================================================
+   Modal Tab Navigation (Segmented Tabs)
+   ========================================================================== */
+.modal-tab-nav {
+  display: flex;
+  background: rgba(15, 23, 42, 0.4);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 20px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+body.theme-light .modal-tab-nav {
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.modal-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.modal-tab-btn svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.modal-tab-btn:hover {
+  color: var(--text-main);
+}
+
+.modal-tab-btn:hover svg {
+  color: var(--text-main);
+}
+
+.modal-tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 600;
+}
+
+.modal-tab-btn.active svg {
+  color: var(--primary);
+}
+
+body.theme-light .modal-tab-btn {
+  color: #64748b;
+}
+
+body.theme-light .modal-tab-btn:hover {
+  color: #0f172a;
+}
+
+body.theme-light .modal-tab-btn.active {
+  color: #2D7A68;
+  border-bottom-color: #2D7A68;
+}
+
+body.theme-light .modal-tab-btn.active svg {
+  color: #2D7A68;
+}
+
+/* Tab Panes */
+.modal-tab-pane {
+  display: none;
+}
+
+.modal-tab-pane.active {
+  display: block;
+  animation: tabFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Relations Tab Hint Callout */
+.relations-tab-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(69, 166, 146, 0.08);
+  border: 1px solid rgba(69, 166, 146, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  color: var(--text-main);
+}
+
+.relations-tab-hint svg {
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.relations-tab-hint-text strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 2px;
+}
+
+.relations-tab-hint-text p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+body.theme-light .relations-tab-hint {
+  background: rgba(45, 122, 104, 0.06);
+  border-color: rgba(45, 122, 104, 0.2);
+}
+
+body.theme-light .relations-tab-hint-text strong {
+  color: #2D7A68;
+}
+
+body.theme-light .relations-tab-hint-text p {
+  color: #475569;
 }
 
 .modal-body {
@@ -3163,6 +3313,12 @@ body.theme-light .toast-close:hover {
     max-height: 90vh;
     max-height: 90dvh;
     border-radius: var(--radius-md);
+  }
+
+  #memberModal .modal-container {
+    height: 85vh;
+    height: 85dvh;
+    max-height: 90vh;
   }
 
   .form-grid {

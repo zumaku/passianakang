@@ -155,154 +155,148 @@
         </div>
 
         <form id="memberForm">
-          <div class="modal-body">
-            <input type="hidden" id="memberId" />
-            
-            <div class="form-grid">
-              <!-- Section 1: Profil & Identitas -->
-              <div class="form-section-header">
-                <div class="form-section-title">
-                  <i data-lucide="user"></i>
-                  <span>Profil & Identitas</span>
-                </div>
-              </div>
+          <input type="hidden" id="memberId" />
+          
+          <!-- Segmented Tab Navigation -->
+          <div class="modal-tab-nav">
+            <button type="button" class="modal-tab-btn active" data-tab="tabProfile">
+              <i data-lucide="user"></i>
+              <span>Profil & Data Diri</span>
+            </button>
+            <button type="button" class="modal-tab-btn" data-tab="tabRelations">
+              <i data-lucide="network"></i>
+              <span>Hubungan Keluarga</span>
+            </button>
+          </div>
 
-              <div class="form-group-row full-width">
-                <div class="form-group form-group-name">
-                  <label class="form-label" for="memberName">Nama Lengkap *</label>
-                  <input type="text" id="memberName" class="form-control" placeholder="Contoh: Raden Soetomo" required />
-                </div>
-
-                <div class="form-group form-group-gender">
-                  <label class="form-label" for="memberGender">Jenis Kelamin</label>
-                  <select id="memberGender" class="form-control">
-                    <option value="male">Pria</option>
-                    <option value="female">Wanita</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group-row full-width">
-                <div class="form-group">
-                  <label class="form-label" for="memberBirthDate">Tanggal Lahir</label>
-                  <input type="date" id="memberBirthDate" class="form-control" />
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label">Status</label>
-                  <label class="status-radio-item" id="labelStatusDeceased" title="Klik jika anggota telah wafat">
-                    <input type="checkbox" id="statusDeceased" class="deceased-check" />
-                    <i data-lucide="flower-2" class="status-flower-icon"></i>
-                    <span class="status-radio-text">Telah Wafat</span>
-                  </label>
-                </div>
-              </div>
-
-              <!-- Bagian Khusus yang Muncul Saat Telah Wafat Dicheck -->
-              <div id="deceasedFieldsWrapper" class="deceased-fields-wrapper full-width" style="display: none;">
-                <div class="deceased-box">
-                  <div class="deceased-box-header">
-                    <i data-lucide="flower-2"></i>
-                    <span>Informasi Kematian & Makam</span>
+          <div class="modal-body modal-body-tabbed">
+            <!-- TAB 1: Profil & Data Diri -->
+            <div id="tabProfile" class="modal-tab-pane active">
+              <div class="form-grid">
+                <div class="form-group-row full-width">
+                  <div class="form-group form-group-name">
+                    <label class="form-label" for="memberName">Nama Lengkap *</label>
+                    <input type="text" id="memberName" class="form-control" placeholder="Contoh: Raden Soetomo" required />
                   </div>
-                  <div class="form-grid deceased-grid">
-                    <div class="form-group">
-                      <label class="form-label" for="memberDeathDate">Tanggal Wafat</label>
-                      <input type="date" id="memberDeathDate" class="form-control" />
-                    </div>
 
-                    <div class="form-group">
-                      <label class="form-label" for="memberCemetery">Lokasi Makam / Kubur</label>
-                      <input type="text" id="memberCemetery" class="form-control" placeholder="Contoh: TPU Karet Bivak, Blok A" />
-                    </div>
+                  <div class="form-group form-group-gender">
+                    <label class="form-label" for="memberGender">Jenis Kelamin</label>
+                    <select id="memberGender" class="form-control">
+                      <option value="male">Pria</option>
+                      <option value="female">Wanita</option>
+                    </select>
+                  </div>
+                </div>
 
-                    <div class="form-group full-width">
-                      <label class="form-label" for="memberCemeteryCoords">
-                        Koordinat Maps / Tautan Lokasi Makam
-                        <span class="label-hint">(Opsional, untuk navigasi ziarah)</span>
-                      </label>
-                      <div class="coords-input-wrapper">
-                        <input type="text" id="memberCemeteryCoords" class="form-control" placeholder="Contoh: -5.147665, 119.432732 atau Link Maps" />
-                        <button type="button" id="btnPickMap" class="btn btn-secondary btn-coords-action" title="Pilih titik lokasi langsung di peta">
-                          <i data-lucide="map-pin"></i> <span class="btn-text">Pilih di Peta</span>
-                        </button>
-                        <button type="button" id="btnTestMaps" class="btn btn-secondary btn-coords-action" title="Buka koordinat di Google Maps" style="display: none;">
-                          <i data-lucide="external-link"></i> <span class="btn-text">Buka Maps</span>
-                        </button>
+                <div class="form-group-row full-width">
+                  <div class="form-group">
+                    <label class="form-label" for="memberBirthDate">Tanggal Lahir</label>
+                    <input type="date" id="memberBirthDate" class="form-control" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Status</label>
+                    <label class="status-radio-item" id="labelStatusDeceased" title="Klik jika anggota telah wafat">
+                      <input type="checkbox" id="statusDeceased" class="deceased-check" />
+                      <i data-lucide="flower-2" class="status-flower-icon"></i>
+                      <span class="status-radio-text">Telah Wafat</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Bagian Khusus yang Muncul Saat Telah Wafat Dicheck -->
+                <div id="deceasedFieldsWrapper" class="deceased-fields-wrapper full-width" style="display: none;">
+                  <div class="deceased-box">
+                    <div class="deceased-box-header">
+                      <i data-lucide="flower-2"></i>
+                      <span>Informasi Kematian & Makam</span>
+                    </div>
+                    <div class="form-grid deceased-grid">
+                      <div class="form-group">
+                        <label class="form-label" for="memberDeathDate">Tanggal Wafat</label>
+                        <input type="date" id="memberDeathDate" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label" for="memberCemetery">Lokasi Makam / Kubur</label>
+                        <input type="text" id="memberCemetery" class="form-control" placeholder="Contoh: TPU Karet Bivak, Blok A" />
+                      </div>
+
+                      <div class="form-group full-width">
+                        <label class="form-label" for="memberCemeteryCoords">
+                          Koordinat Maps / Tautan Lokasi Makam
+                          <span class="label-hint">(Opsional, untuk navigasi ziarah)</span>
+                        </label>
+                        <div class="coords-input-wrapper">
+                          <input type="text" id="memberCemeteryCoords" class="form-control" placeholder="Contoh: -5.147665, 119.432732 atau Link Maps" />
+                          <button type="button" id="btnPickMap" class="btn btn-secondary btn-coords-action" title="Pilih titik lokasi langsung di peta">
+                            <i data-lucide="map-pin"></i> <span class="btn-text">Pilih di Peta</span>
+                          </button>
+                          <button type="button" id="btnTestMaps" class="btn btn-secondary btn-coords-action" title="Buka koordinat di Google Maps" style="display: none;">
+                            <i data-lucide="external-link"></i> <span class="btn-text">Buka Maps</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="form-group full-width">
+                        <label class="form-label" for="memberDeathNotes">
+                          Catatan Pemakaman / Kematian
+                          <span class="label-hint">(Opsional: Blok makam, nomor nisan, wasiat, petunjuk jalan, dsb.)</span>
+                        </label>
+                        <textarea id="memberDeathNotes" class="form-control" rows="2" placeholder="Contoh: Blok B3 No. 12, dekat pohon kamboja besar TPU Panaikang"></textarea>
                       </div>
                     </div>
-
-                    <div class="form-group full-width">
-                      <label class="form-label" for="memberDeathNotes">
-                        Catatan Pemakaman / Kematian
-                        <span class="label-hint">(Opsional: Blok makam, nomor nisan, wasiat, petunjuk jalan, dsb.)</span>
-                      </label>
-                      <textarea id="memberDeathNotes" class="form-control" rows="2" placeholder="Contoh: Blok B3 No. 12, dekat pohon kamboja besar TPU Panaikang"></textarea>
-                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="form-group full-width">
-                <label class="form-label" for="memberJob">Pekerjaan / Profesi</label>
-                <input type="text" id="memberJob" class="form-control" placeholder="Contoh: Dosen, Dokter, Pelajar, Wiraswasta" />
-              </div>
+                <div class="form-group full-width">
+                  <label class="form-label" for="memberJob">Pekerjaan / Profesi</label>
+                  <input type="text" id="memberJob" class="form-control" placeholder="Contoh: Dosen, Dokter, Pelajar, Wiraswasta" />
+                </div>
 
-              <div class="form-group full-width">
-                <label class="form-label" for="memberImg">Foto Profil / Avatar</label>
-                <div class="avatar-input-wrapper">
-                  <div class="avatar-preview-wrap" id="avatarPreviewWrap" title="Pratinjau Foto">
-                    <img id="avatarPreviewImg" class="avatar-preview-img" src="" alt="Pratinjau Foto" />
-                    <div id="avatarPreviewFallback" class="avatar-preview-fallback">
-                      <i data-lucide="image"></i>
+                <div class="form-group full-width">
+                  <label class="form-label" for="memberImg">Foto Profil / Avatar</label>
+                  <div class="avatar-input-wrapper">
+                    <div class="avatar-preview-wrap" id="avatarPreviewWrap" title="Pratinjau Foto">
+                      <img id="avatarPreviewImg" class="avatar-preview-img" src="" alt="Pratinjau Foto" />
+                      <div id="avatarPreviewFallback" class="avatar-preview-fallback">
+                        <i data-lucide="image"></i>
+                      </div>
                     </div>
+                    <input type="url" id="memberImg" class="form-control" placeholder="https://..." />
                   </div>
-                  <input type="url" id="memberImg" class="form-control" placeholder="https://..." />
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label" for="memberBio">Catatan Biografi / Bio</label>
+                  <textarea id="memberBio" class="form-control" placeholder="Tuliskan catatan singkat mengenai anggota keluarga ini..."></textarea>
                 </div>
               </div>
+            </div>
 
-              <!-- Section 2: Hubungan Silsilah / Keluarga -->
-              <div class="form-section-header">
-                <div class="form-section-title">
-                  <i data-lucide="network"></i>
-                  <span>Hubungan Keluarga</span>
+            <!-- TAB 2: Hubungan Keluarga -->
+            <div id="tabRelations" class="modal-tab-pane">
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label class="form-label" for="memberFather">Ayah</label>
+                  <select id="memberFather" class="form-control">
+                    <option value="">Tidak Diketahui</option>
+                  </select>
                 </div>
-                <span class="form-section-desc">Tautkan orang tua & pasangan</span>
-              </div>
 
-              <div class="form-group">
-                <label class="form-label" for="memberFather">Ayah</label>
-                <select id="memberFather" class="form-control">
-                  <option value="">Tidak Diketahui</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="memberMother">Ibu</label>
-                <select id="memberMother" class="form-control">
-                  <option value="">Tidak Diketahui</option>
-                </select>
-              </div>
-
-              <div class="form-group full-width">
-                <label class="form-label" for="memberSpouse">Pasangan (Suami / Istri)</label>
-                <select id="memberSpouse" class="form-control">
-                  <option value="">Belum Menikah</option>
-                </select>
-              </div>
-
-              <!-- Section 3: Catatan Tambahan -->
-              <div class="form-section-header">
-                <div class="form-section-title">
-                  <i data-lucide="notebook-pen"></i>
-                  <span>Catatan Tambahan</span>
+                <div class="form-group full-width">
+                  <label class="form-label" for="memberMother">Ibu</label>
+                  <select id="memberMother" class="form-control">
+                    <option value="">Tidak Diketahui</option>
+                  </select>
                 </div>
-                <span class="form-section-desc">Opsional</span>
-              </div>
 
-              <div class="form-group full-width">
-                <label class="form-label" for="memberBio">Catatan Biografi / Bio</label>
-                <textarea id="memberBio" class="form-control" placeholder="Tuliskan catatan singkat mengenai anggota keluarga ini..."></textarea>
+                <div class="form-group full-width">
+                  <label class="form-label" for="memberSpouse">Pasangan (Suami / Istri)</label>
+                  <select id="memberSpouse" class="form-control">
+                    <option value="">Belum Menikah</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
