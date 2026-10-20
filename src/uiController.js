@@ -390,15 +390,25 @@ export class UIController {
     if (!member) return;
     this.activeMemberId = member.id;
 
+    const isFemale = member.gender === 'female';
+    const defaultAvatarMale = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
+    const defaultAvatarFemale = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80';
+
     // Fill detail fields
-    this.detailAvatar.src = member.img || (member.gender === 'female' 
-      ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80' 
-      : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80');
+    this.detailAvatar.src = member.img || (isFemale ? defaultAvatarFemale : defaultAvatarMale);
+    this.detailAvatar.onerror = () => {
+      this.detailAvatar.onerror = null;
+      this.detailAvatar.src = isFemale ? defaultAvatarFemale : defaultAvatarMale;
+    };
+
+    // Update avatar ring border & glow according to gender
+    this.detailAvatar.classList.toggle('avatar-female', isFemale);
+    this.detailAvatar.classList.toggle('avatar-male', !isFemale);
 
     this.detailName.textContent = member.name || 'Tanpa Nama';
     
     // Gender badge dengan ikon proporsional
-    if (member.gender === 'female') {
+    if (isFemale) {
       this.detailGenderBadge.className = 'badge badge-pink';
       this.detailGenderBadge.innerHTML = `
         <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -507,15 +517,24 @@ export class UIController {
   }
 
   appendRelationItem(container, member, roleLabel) {
+    const isFemale = member.gender === 'female';
+    const defaultAvatar = isFemale
+      ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+      : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80';
     const li = document.createElement('li');
-    li.className = 'relation-item';
+    li.className = `relation-item ${isFemale ? 'female' : 'male'}`;
     li.innerHTML = `
-      <img src="${member.img}" class="relation-avatar" alt="${member.name}" />
+      <img src="${member.img || defaultAvatar}" class="relation-avatar ${isFemale ? 'avatar-female' : 'avatar-male'}" alt="${member.name}" />
       <div class="relation-info">
         <span class="relation-name">${member.name}</span>
         <span class="relation-role">${roleLabel}</span>
       </div>
     `;
+    const imgEl = li.querySelector('img');
+    imgEl.onerror = () => {
+      imgEl.onerror = null;
+      imgEl.src = defaultAvatar;
+    };
     li.addEventListener('click', () => {
       this.showMemberDetail(member);
       this.treeService.search(member.name);

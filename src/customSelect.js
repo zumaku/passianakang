@@ -223,7 +223,6 @@ export class CustomSelect {
         </div>
         <div class="custom-select-info">
           <span class="custom-select-name">${member.name}</span>
-          <span class="custom-select-sub">${member.job || (member.gender === 'female' ? 'Wanita' : 'Pria')}</span>
         </div>
         <svg class="custom-select-check" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"></polyline>
@@ -332,7 +331,6 @@ export class CustomSelect {
           <img src="${avatarSrc}" class="custom-select-trigger-avatar" alt="${selectedMember.name}" />
           <div class="custom-select-trigger-text">
             <span class="custom-select-trigger-name">${selectedMember.name}</span>
-            <span class="custom-select-trigger-role">${selectedMember.job || (selectedMember.gender === 'female' ? 'Wanita' : 'Pria')}</span>
           </div>
         </div>
       `;

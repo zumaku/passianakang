@@ -12,20 +12,11 @@ export class FamilyTreeService {
   initCustomTemplates() {
     // Custom modern template based on 'tommy'
     FamilyTree.templates.modernGlass = Object.assign({}, FamilyTree.templates.tommy);
-    FamilyTree.templates.modernGlass.size = [250, 110];
-
-    // Three dots menu button (positioned top right)
-    const customNodeMenuButton =
-      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,210,10)" data-ctrl-n-menu-id="{id}">' +
-        '<rect x="0" y="0" width="28" height="28" rx="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" class="ft-menu-btn"></rect>' +
-        '<circle cx="14" cy="7" r="2.2" fill="#cbd5e1" style="pointer-events:none;"></circle>' +
-        '<circle cx="14" cy="14" r="2.2" fill="#cbd5e1" style="pointer-events:none;"></circle>' +
-        '<circle cx="14" cy="21" r="2.2" fill="#cbd5e1" style="pointer-events:none;"></circle>' +
-      '</g>';
+    FamilyTree.templates.modernGlass.size = [210, 72];
 
     // Up / expand tree connection button (Treemap / Hierarchy Icon)
     const customUpButton =
-      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,111,-14)" data-btn-id="{id}">' +
+      '<g style="cursor:pointer;" transform="matrix(1,0,0,1,91,-14)" data-btn-id="{id}">' +
         '<circle cx="14" cy="14" r="14" fill="#0f172a" stroke="#45A692" stroke-width="2" class="ft-up-btn"></circle>' +
         '<g fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
           '<path d="M14 10v4M9 14h10M9 14v4M19 14v4"/>' +
@@ -36,69 +27,80 @@ export class FamilyTreeService {
       '</g>';
 
     FamilyTree.templates.modernGlass.up = customUpButton;
-    FamilyTree.templates.modernGlass.nodeMenuButton = customNodeMenuButton;
-    FamilyTree.templates.modernGlass.menuButton = customNodeMenuButton;
+    FamilyTree.templates.modernGlass.nodeMenuButton = '';
+    FamilyTree.templates.modernGlass.menuButton = '';
 
-    // Image avatar configuration
+    // Image avatar configuration (centered vertically at y=36)
     FamilyTree.templates.modernGlass.img_0 =
       '<clipPath id="avatarClip_{id}">' +
-        '<circle cx="44" cy="55" r="26"></circle>' +
+        '<circle cx="36" cy="36" r="22"></circle>' +
       '</clipPath>' +
-      '<circle cx="44" cy="55" r="29" fill="none" stroke="#45A692" stroke-width="2" opacity="0.6" class="avatar-ring"></circle>' +
-      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="18" y="29" width="52" height="52"></image>';
+      '<circle cx="36" cy="36" r="25" fill="none" stroke="#45A692" stroke-width="2" opacity="0.6" class="avatar-ring"></circle>' +
+      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="14" y="14" width="44" height="44"></image>';
 
     // Name text (with automatic ellipsis truncation on overflow)
     FamilyTree.templates.modernGlass.field_0 =
-      '<text data-width="120" data-text-overflow="ellipsis" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="var(--node-text-name, #ffffff)" class="ft-node-name" x="80" y="34">{val}</text>';
+      '<text data-width="130" data-text-overflow="ellipsis" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="var(--node-text-name, #ffffff)" class="ft-node-name" x="70" y="31">{val}</text>';
 
-    // Job / Profession text (with ellipsis truncation)
-    FamilyTree.templates.modernGlass.field_1 =
-      '<text data-width="155" data-text-overflow="ellipsis" style="font-size: 11px; font-weight: 500; font-family: Inter, sans-serif;" fill="var(--node-text-title, #94a3b8)" class="ft-node-title" x="80" y="72">{val}</text>';
+    // Remove job and birth date fields for minimalist layout
+    FamilyTree.templates.modernGlass.field_1 = '';
+    FamilyTree.templates.modernGlass.field_2 = '';
 
-    // Birth Date text (with ellipsis truncation)
-    FamilyTree.templates.modernGlass.field_2 =
-      '<text data-width="155" data-text-overflow="ellipsis" style="font-size: 10px; font-weight: 400; font-family: Inter, sans-serif;" fill="var(--node-text-sub, #64748b)" class="ft-node-birth" x="80" y="88">{val}</text>';
+    // Flower badge SVG generator for deceased members
+    const flowerBadgeSvg = (xPos) =>
+      `<g transform="translate(${xPos}, 40)" class="ft-flower-badge">` +
+        '<title>Telah Wafat</title>' +
+        '<rect x="0" y="0" width="22" height="18" rx="9" fill="rgba(244, 63, 94, 0.2)" stroke="rgba(244, 63, 94, 0.45)" stroke-width="1"/>' +
+        '<g transform="translate(4, 2) scale(0.58)" stroke="#f43f5e" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+          '<path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/>' +
+          '<circle cx="12" cy="8" r="2"/>' +
+          '<path d="m8 14 4 6 4-6"/>' +
+          '<path d="M12 20v2"/>' +
+        '</g>' +
+      '</g>';
 
     // Custom male node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
-    FamilyTree.templates.modernGlass_male.up = customUpButton;
-    FamilyTree.templates.modernGlass_male.nodeMenuButton = customNodeMenuButton;
-    FamilyTree.templates.modernGlass_male.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.node =
-      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card ft-node-male"></rect>' +
-      '<g transform="translate(80, 42)">' +
-        '<rect x="0" y="0" width="46" height="16" rx="8" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
+      '<rect x="0" y="0" height="72" width="210" fill="var(--bg-node, #0f172a)" rx="12" ry="12" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card ft-node-male"></rect>' +
+      '<g transform="translate(70, 40)">' +
+        '<rect x="0" y="0" width="46" height="18" rx="9" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
         '<g class="ft-gender-icon-male" stroke="#7AD4C0" stroke-width="1.3" fill="none">' +
           '<circle cx="9.5" cy="9.5" r="2.8"/>' +
           '<line x1="11.5" y1="7.5" x2="15" y2="4"/>' +
           '<polyline points="12.8,4 15,4 15,6.2" stroke-linecap="round" stroke-linejoin="round"/>' +
         '</g>' +
-        '<text x="19" y="11.5" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">Pria</text>' +
+        '<text x="19" y="12.5" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">Pria</text>' +
       '</g>';
+
+    // Male deceased node with flower badge beside gender badge (70 + 46 + 5 = 121)
+    FamilyTree.templates.modernGlass_male_deceased = Object.assign({}, FamilyTree.templates.modernGlass_male);
+    FamilyTree.templates.modernGlass_male_deceased.node = FamilyTree.templates.modernGlass_male.node + flowerBadgeSvg(121);
 
     // Custom female node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
-    FamilyTree.templates.modernGlass_female.up = customUpButton;
-    FamilyTree.templates.modernGlass_female.nodeMenuButton = customNodeMenuButton;
-    FamilyTree.templates.modernGlass_female.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_female.img_0 =
       '<clipPath id="avatarClip_{id}">' +
-        '<circle cx="44" cy="55" r="26"></circle>' +
+        '<circle cx="36" cy="36" r="22"></circle>' +
       '</clipPath>' +
-      '<circle cx="44" cy="55" r="29" fill="none" stroke="#ec4899" stroke-width="2" opacity="0.6" class="avatar-ring"></circle>' +
-      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="18" y="29" width="52" height="52"></image>';
+      '<circle cx="36" cy="36" r="25" fill="none" stroke="#ec4899" stroke-width="2" opacity="0.6" class="avatar-ring"></circle>' +
+      '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="14" y="14" width="44" height="44"></image>';
 
     FamilyTree.templates.modernGlass_female.node =
-      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#db2777" stroke-width="1.5" class="ft-node-card ft-node-female"></rect>' +
-      '<g transform="translate(80, 42)">' +
-        '<rect x="0" y="0" width="56" height="16" rx="8" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
+      '<rect x="0" y="0" height="72" width="210" fill="var(--bg-node, #0f172a)" rx="12" ry="12" stroke="#db2777" stroke-width="1.5" class="ft-node-card ft-node-female"></rect>' +
+      '<g transform="translate(70, 40)">' +
+        '<rect x="0" y="0" width="56" height="18" rx="9" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
         '<g class="ft-gender-icon-female" stroke="#fbcfe8" stroke-width="1.3" fill="none">' +
-          '<circle cx="10" cy="6" r="2.8"/>' +
-          '<line x1="10" y1="8.8" x2="10" y2="13.5"/>' +
-          '<line x1="7.8" y1="11" x2="12.2" y2="11"/>' +
+          '<circle cx="10" cy="7" r="2.8"/>' +
+          '<line x1="10" y1="9.8" x2="10" y2="14.5"/>' +
+          '<line x1="7.8" y1="12" x2="12.2" y2="12"/>' +
         '</g>' +
-        '<text x="18" y="11.5" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">Wanita</text>' +
+        '<text x="18" y="12.5" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">Wanita</text>' +
       '</g>';
+
+    // Female deceased node with flower badge beside gender badge (70 + 56 + 5 = 131)
+    FamilyTree.templates.modernGlass_female_deceased = Object.assign({}, FamilyTree.templates.modernGlass_female);
+    FamilyTree.templates.modernGlass_female_deceased.node = FamilyTree.templates.modernGlass_female.node + flowerBadgeSvg(131);
   }
 
   render(nodesData) {
@@ -116,38 +118,11 @@ export class FamilyTreeService {
       if (!copy.img) {
         copy.img = copy.gender === 'female' ? defaultAvatarFemale : defaultAvatarMale;
       }
-      if (!copy.tags || !Array.isArray(copy.tags)) {
-        copy.tags = [copy.gender || 'male'];
-      }
-      if (copy.birthDate && copy.deathDate) {
-        copy.displayDate = `${copy.birthDate} - ${copy.deathDate}`;
-      } else if (copy.birthDate) {
-        copy.displayDate = copy.birthDate;
-      } else if (copy.deathDate) {
-        copy.displayDate = `Wafat: ${copy.deathDate}`;
-      } else {
-        copy.displayDate = '';
-      }
+      const isDeceased = Boolean(copy.isDeceased === true || copy.isDeceased === 'true' || copy.deathDate);
+      const gender = copy.gender === 'female' ? 'female' : 'male';
+      copy.tags = [isDeceased ? `${gender}_deceased` : gender];
       return copy;
     });
-
-    const nodeMenuConfig = {
-      details: {
-        text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Lihat Detail',
-        icon: '',
-        onClick: (id) => this.triggerSelectNode(id)
-      },
-      edit: {
-        text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>Edit Anggota',
-        icon: '',
-        onClick: (id) => this.triggerEditNode(id)
-      },
-      add: {
-        text: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px; vertical-align:middle; display:inline-block;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="16" x2="22" y1="11" y2="11"/></svg>Tambah Kerabat',
-        icon: '',
-        onClick: (id) => this.triggerAddRelative(id)
-      }
-    };
 
     this.familyTree = new FamilyTree(this.container, {
       nodes: processedNodes,
@@ -157,48 +132,32 @@ export class FamilyTreeService {
       scaleInitial: FamilyTree.match.boundary,
       nodeBinding: {
         field_0: 'name',
-        field_1: 'job',
-        field_2: 'displayDate',
         img_0: 'img'
       },
       tags: {
         male: {
-          template: 'modernGlass_male',
-          nodeMenu: nodeMenuConfig
+          template: 'modernGlass_male'
         },
         female: {
-          template: 'modernGlass_female',
-          nodeMenu: nodeMenuConfig
+          template: 'modernGlass_female'
+        },
+        male_deceased: {
+          template: 'modernGlass_male_deceased'
+        },
+        female_deceased: {
+          template: 'modernGlass_female_deceased'
         }
       },
-      nodeMenu: nodeMenuConfig,
+      nodeMenu: null,
       editForm: null // Disable built-in Balkan edit form to prevent overlapping sidebars
     });
 
-    // Explicit capture-phase listener for 3-dots option button to guarantee menu popup
-    if (this.container) {
-      this.container.addEventListener('click', (e) => {
-        const menuBtn = e.target.closest('[data-ctrl-n-menu-id]') || e.target.closest('.ft-menu-btn');
-        if (menuBtn && this.familyTree) {
-          const nodeCard = e.target.closest('[data-n-id]');
-          const nodeId = nodeCard ? nodeCard.getAttribute('data-n-id') : menuBtn.getAttribute('data-ctrl-n-menu-id');
-          if (nodeId && nodeId !== '{id}' && this.familyTree.nodeMenuUI) {
-            e.stopPropagation();
-            e.preventDefault();
-            this.familyTree.nodeMenuUI.showStickIn(menuBtn, nodeId, null, nodeMenuConfig);
-          }
-        }
-      }, true);
-    }
-
     // Handle node click event - return false to cancel Balkan built-in sidebar popup
     this.familyTree.onNodeClick((args) => {
-      // Ignore click if 3-dots menu button or expand button was clicked
+      // Ignore click if expand button was clicked
       if (args.event && args.event.target) {
         const target = args.event.target;
         if (
-          target.closest('[data-ctrl-n-menu-id]') ||
-          target.closest('.ft-menu-btn') ||
           target.closest('[data-btn-id]') ||
           target.closest('.ft-up-btn')
         ) {
@@ -317,13 +276,13 @@ export class FamilyTreeService {
           pulseRing.setAttribute('class', 'ft-search-pulse-ring');
           pulseRing.setAttribute('x', '-6');
           pulseRing.setAttribute('y', '-6');
-          pulseRing.setAttribute('width', '262');
-          pulseRing.setAttribute('height', '122');
+          pulseRing.setAttribute('width', '222');
+          pulseRing.setAttribute('height', '84');
           pulseRing.setAttribute('rx', '18');
 
           const tagGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
           tagGroup.setAttribute('class', 'ft-search-tag');
-          tagGroup.setAttribute('transform', 'translate(65, -26)');
+          tagGroup.setAttribute('transform', 'translate(45, -26)');
           tagGroup.innerHTML = `
             <rect x="0" y="0" width="120" height="22" rx="11" fill="#45A692" stroke="#ffffff" stroke-width="1.5"/>
             <text x="60" y="15" text-anchor="middle" font-size="11" font-weight="700" font-family="Inter, sans-serif" fill="#ffffff">🎯 HASIL CARI</text>
