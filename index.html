@@ -53,36 +53,9 @@
         </div>
 
         <div class="nav-menu-group">
-          <div class="menu-label">Anggota</div>
           <button id="btnAddMember" class="btn btn-primary" title="Tambah Anggota">
             <i data-lucide="user-plus"></i> <span class="btn-text">Tambah</span>
           </button>
-
-          <button id="btnEditNav" class="btn btn-secondary" title="Edit Anggota Terpilih">
-            <i data-lucide="edit-3"></i> <span class="btn-text">Edit</span>
-          </button>
-        </div>
-
-        <div class="nav-menu-group">
-          <div class="menu-label">Data & Berkas</div>
-          <div class="action-grid">
-            <button id="btnExportJSON" class="btn btn-secondary" title="Unduh data JSON">
-              <i data-lucide="download"></i> <span class="btn-text">JSON</span>
-            </button>
-
-            <button id="btnImportJSON" class="btn btn-secondary" title="Impor dari file JSON">
-              <i data-lucide="upload"></i> <span class="btn-text">Impor</span>
-            </button>
-            <input type="file" id="fileInputJSON" accept=".json" style="display: none;" />
-
-            <button id="btnExportPNG" class="btn btn-secondary" title="Ekspor ke Gambar PNG">
-              <i data-lucide="image"></i> <span class="btn-text">PNG</span>
-            </button>
-
-            <button id="btnExportPDF" class="btn btn-secondary" title="Ekspor ke Dokumen PDF">
-              <i data-lucide="file-text"></i> <span class="btn-text">PDF</span>
-            </button>
-          </div>
         </div>
 
         <div class="nav-menu-group">
@@ -126,14 +99,20 @@
           <div class="profile-card">
             <img id="detailAvatar" class="profile-avatar" src="" alt="Avatar" />
             <h2 id="detailName" class="profile-name">-</h2>
-            <p id="detailTitle" class="profile-title">-</p>
             <span id="detailGenderBadge" class="badge badge-blue">-</span>
           </div>
 
           <div class="info-group">
             <div class="info-label">Informasi Kelahiran</div>
             <div id="detailBirthDate" class="info-val">-</div>
-            <div id="detailDeathDate" class="info-val" style="color: #f87171;"></div>
+          </div>
+
+          <div id="detailDeceasedGroup" class="info-group deceased-info-group" style="display: none;">
+            <div class="info-label deceased-info-label">Informasi Wafat & Pemakaman</div>
+            <div id="detailDeathDate" class="info-val text-deceased">-</div>
+            <div id="detailCemetery" class="info-val" style="margin-top: 4px;"></div>
+            <div id="detailCemeteryCoords" class="info-val" style="margin-top: 6px;"></div>
+            <div id="detailDeathNotes" class="info-val detail-death-notes" style="margin-top: 6px; display: none;"></div>
           </div>
 
           <div class="info-group">
@@ -180,32 +159,80 @@
             <input type="hidden" id="memberId" />
             
             <div class="form-grid">
-              <div class="form-group full-width">
-                <label class="form-label" for="memberName">Nama Lengkap *</label>
-                <input type="text" id="memberName" class="form-control" placeholder="Contoh: Raden Soetomo" required />
+              <div class="form-group-row full-width">
+                <div class="form-group form-group-name">
+                  <label class="form-label" for="memberName">Nama Lengkap *</label>
+                  <input type="text" id="memberName" class="form-control" placeholder="Contoh: Raden Soetomo" required />
+                </div>
+
+                <div class="form-group form-group-gender">
+                  <label class="form-label" for="memberGender">Jenis Kelamin</label>
+                  <select id="memberGender" class="form-control">
+                    <option value="male">Pria</option>
+                    <option value="female">Wanita</option>
+                  </select>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label class="form-label" for="memberGender">Jenis Kelamin</label>
-                <select id="memberGender" class="form-control">
-                  <option value="male">Pria</option>
-                  <option value="female">Wanita</option>
-                </select>
+              <div class="form-group-row full-width">
+                <div class="form-group">
+                  <label class="form-label" for="memberBirthDate">Tanggal Lahir</label>
+                  <input type="date" id="memberBirthDate" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Status</label>
+                  <label class="status-radio-item" id="labelStatusDeceased" title="Klik jika anggota telah wafat">
+                    <input type="checkbox" id="statusDeceased" class="deceased-check" />
+                    <i data-lucide="flower-2" class="status-flower-icon"></i>
+                    <span class="status-radio-text">Telah Wafat</span>
+                  </label>
+                </div>
               </div>
 
-              <div class="form-group">
-                <label class="form-label" for="memberTitle">Peran / Gelar</label>
-                <input type="text" id="memberTitle" class="form-control" placeholder="Contoh: Kakek, Ibu, Anak Sulung" />
-              </div>
+              <!-- Bagian Khusus yang Muncul Saat Telah Wafat Dicheck -->
+              <div id="deceasedFieldsWrapper" class="deceased-fields-wrapper full-width" style="display: none;">
+                <div class="deceased-box">
+                  <div class="deceased-box-header">
+                    <i data-lucide="flower-2"></i>
+                    <span>Informasi Kematian & Makam</span>
+                  </div>
+                  <div class="form-grid deceased-grid">
+                    <div class="form-group">
+                      <label class="form-label" for="memberDeathDate">Tanggal Wafat</label>
+                      <input type="date" id="memberDeathDate" class="form-control" />
+                    </div>
 
-              <div class="form-group">
-                <label class="form-label" for="memberBirthDate">Tanggal Lahir</label>
-                <input type="date" id="memberBirthDate" class="form-control" />
-              </div>
+                    <div class="form-group">
+                      <label class="form-label" for="memberCemetery">Lokasi Makam / Kubur</label>
+                      <input type="text" id="memberCemetery" class="form-control" placeholder="Contoh: TPU Karet Bivak, Blok A" />
+                    </div>
 
-              <div class="form-group">
-                <label class="form-label" for="memberDeathDate">Tanggal Wafat (opsional)</label>
-                <input type="date" id="memberDeathDate" class="form-control" />
+                    <div class="form-group full-width">
+                      <label class="form-label" for="memberCemeteryCoords">
+                        Koordinat Maps / Tautan Lokasi Makam
+                        <span class="label-hint">(Opsional, untuk navigasi ziarah)</span>
+                      </label>
+                      <div class="coords-input-wrapper">
+                        <input type="text" id="memberCemeteryCoords" class="form-control" placeholder="Contoh: -5.147665, 119.432732 atau Link Maps" />
+                        <button type="button" id="btnPickMap" class="btn btn-secondary btn-coords-action" title="Pilih titik lokasi langsung di peta">
+                          <i data-lucide="map-pin"></i> <span class="btn-text">Pilih di Peta</span>
+                        </button>
+                        <button type="button" id="btnTestMaps" class="btn btn-secondary btn-coords-action" title="Buka koordinat di Google Maps" style="display: none;">
+                          <i data-lucide="external-link"></i> <span class="btn-text">Buka Maps</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                      <label class="form-label" for="memberDeathNotes">
+                        Catatan Pemakaman / Kematian
+                        <span class="label-hint">(Opsional: Blok makam, nomor nisan, wasiat, petunjuk jalan, dsb.)</span>
+                      </label>
+                      <textarea id="memberDeathNotes" class="form-control" rows="2" placeholder="Contoh: Blok B3 No. 12, dekat pohon kamboja besar TPU Panaikang"></textarea>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="form-group full-width">
@@ -215,28 +242,36 @@
 
               <div class="form-group full-width">
                 <label class="form-label" for="memberImg">URL Foto / Avatar</label>
-                <input type="url" id="memberImg" class="form-control" placeholder="https://..." />
+                <div class="avatar-input-wrapper">
+                  <div class="avatar-preview-wrap" id="avatarPreviewWrap" title="Pratinjau Foto">
+                    <img id="avatarPreviewImg" class="avatar-preview-img" src="" alt="Pratinjau Foto" />
+                    <div id="avatarPreviewFallback" class="avatar-preview-fallback">
+                      <i data-lucide="image"></i>
+                    </div>
+                  </div>
+                  <input type="url" id="memberImg" class="form-control" placeholder="https://..." />
+                </div>
               </div>
 
               <!-- Relasi -->
               <div class="form-group">
                 <label class="form-label" for="memberFather">Ayah</label>
                 <select id="memberFather" class="form-control">
-                  <option value="">-- Tanpa Ayah --</option>
+                  <option value="">Tidak Diketahui</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="memberMother">Ibu</label>
                 <select id="memberMother" class="form-control">
-                  <option value="">-- Tanpa Ibu --</option>
+                  <option value="">Tidak Diketahui</option>
                 </select>
               </div>
 
               <div class="form-group full-width">
                 <label class="form-label" for="memberSpouse">Pasangan (Suami / Istri)</label>
                 <select id="memberSpouse" class="form-control">
-                  <option value="">-- Tanpa Pasangan --</option>
+                  <option value="">Belum Menikah</option>
                 </select>
               </div>
 
@@ -252,6 +287,68 @@
             <button type="submit" class="btn btn-primary">Simpan Data</button>
           </div>
         </form>
+      </div>
+    </div>
+
+    <!-- Modal Pemilihan Lokasi Makam di Peta (Map Picker) -->
+    <div id="mapPickerModal" class="modal-overlay modal-overlay-top">
+      <div class="modal-container map-picker-container">
+        <div class="modal-header">
+          <div class="modal-header-title">
+            <i data-lucide="map-pin" class="header-icon text-rose"></i>
+            <div>
+              <h3 class="modal-title">Pilih Titik Lokasi Makam di Peta</h3>
+              <p class="modal-subtitle">Tentukan koordinat lokasi makam untuk panduan navigasi ziarah</p>
+            </div>
+          </div>
+          <button type="button" id="btnCloseMapPicker" class="icon-btn" title="Tutup">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <div class="modal-body map-picker-modal-body">
+          <!-- Search & Geolocation Toolbar -->
+          <div class="map-picker-toolbar">
+            <div class="map-search-wrapper">
+              <i data-lucide="search" class="map-search-icon"></i>
+              <input type="text" id="mapSearchInput" class="form-control map-search-input" placeholder="Cari nama TPU, jalan, atau daerah (cth: TPU Panaikang Makassar)..." />
+              <button type="button" id="btnMapSearch" class="btn btn-secondary btn-search-go">Cari</button>
+              <div id="mapSearchResults" class="map-search-results" style="display: none;"></div>
+            </div>
+            <div class="map-layer-switch">
+              <button type="button" id="btnLayerStreet" class="map-layer-btn active" title="Peta Jalan (OpenStreetMap)">Peta</button>
+              <button type="button" id="btnLayerSat" class="map-layer-btn" title="Peta Satelit (Esri)">Satelit</button>
+            </div>
+            <button type="button" id="btnMapLocateMe" class="btn btn-secondary btn-locate" title="Deteksi lokasi GPS saya saat ini">
+              <i data-lucide="crosshair"></i> <span class="btn-text">Lokasi Saya</span>
+            </button>
+          </div>
+
+          <!-- Map Hint -->
+          <div class="map-picker-hint">
+            <i data-lucide="info"></i>
+            <span>Klik area peta atau geser penanda merah untuk menentukan koordinat yang akurat.</span>
+          </div>
+
+          <!-- Leaflet Canvas Container -->
+          <div id="mapPickerCanvas" class="map-picker-canvas"></div>
+
+          <!-- Selected Coordinates Display Bar -->
+          <div class="map-coords-bar">
+            <div class="map-coords-indicator">
+              <i data-lucide="navigation-2"></i>
+              <span>Koordinat Titik:</span>
+              <strong id="mapPickedCoordsDisplay">-5.147665, 119.432732</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btnCancelMapPicker" class="btn btn-secondary">Batal</button>
+          <button type="button" id="btnConfirmMapPicker" class="btn btn-primary">
+            <i data-lucide="check"></i> <span>Gunakan Titik Ini</span>
+          </button>
+        </div>
       </div>
     </div>
 

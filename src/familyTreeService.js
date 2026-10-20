@@ -47,17 +47,17 @@ export class FamilyTreeService {
       '<circle cx="44" cy="55" r="29" fill="none" stroke="#45A692" stroke-width="2" opacity="0.6" class="avatar-ring"></circle>' +
       '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="18" y="29" width="52" height="52"></image>';
 
-    // Name text (clipped within card)
+    // Name text (with automatic ellipsis truncation on overflow)
     FamilyTree.templates.modernGlass.field_0 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="var(--node-text-name, #ffffff)" class="ft-node-name" x="80" y="34">{val}</text>';
+      '<text data-width="120" data-text-overflow="ellipsis" style="font-size: 13px; font-weight: 700; font-family: Inter, sans-serif;" fill="var(--node-text-name, #ffffff)" class="ft-node-name" x="80" y="34">{val}</text>';
 
-    // Title / Relationship text (clipped)
+    // Job / Profession text (with ellipsis truncation)
     FamilyTree.templates.modernGlass.field_1 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 11px; font-weight: 500; font-family: Inter, sans-serif;" fill="var(--node-text-title, #94a3b8)" class="ft-node-title" x="80" y="72">{val}</text>';
+      '<text data-width="155" data-text-overflow="ellipsis" style="font-size: 11px; font-weight: 500; font-family: Inter, sans-serif;" fill="var(--node-text-title, #94a3b8)" class="ft-node-title" x="80" y="72">{val}</text>';
 
-    // Birth Date text (clipped)
+    // Birth Date text (with ellipsis truncation)
     FamilyTree.templates.modernGlass.field_2 =
-      '<text clip-path="url(#textClip_{id})" style="font-size: 10px; font-weight: 400; font-family: Inter, sans-serif;" fill="var(--node-text-sub, #64748b)" class="ft-node-birth" x="80" y="88">{val}</text>';
+      '<text data-width="155" data-text-overflow="ellipsis" style="font-size: 10px; font-weight: 400; font-family: Inter, sans-serif;" fill="var(--node-text-sub, #64748b)" class="ft-node-birth" x="80" y="88">{val}</text>';
 
     // Custom male node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_male = Object.assign({}, FamilyTree.templates.modernGlass);
@@ -65,12 +65,16 @@ export class FamilyTreeService {
     FamilyTree.templates.modernGlass_male.nodeMenuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.menuButton = customNodeMenuButton;
     FamilyTree.templates.modernGlass_male.node =
-      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card"></rect>' +
+      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#3A8D7B" stroke-width="1.5" class="ft-node-card ft-node-male"></rect>' +
       '<g transform="translate(80, 42)">' +
-        '<rect x="0" y="0" width="40" height="15" rx="7.5" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
-        '<text x="20" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">♂ Pria</text>' +
-      '</g>' +
-      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="124" height="85" /></clipPath>';
+        '<rect x="0" y="0" width="46" height="16" rx="8" fill="rgba(69, 166, 146, 0.2)" stroke="rgba(69, 166, 146, 0.4)" stroke-width="1"/>' +
+        '<g class="ft-gender-icon-male" stroke="#7AD4C0" stroke-width="1.3" fill="none">' +
+          '<circle cx="9.5" cy="9.5" r="2.8"/>' +
+          '<line x1="11.5" y1="7.5" x2="15" y2="4"/>' +
+          '<polyline points="12.8,4 15,4 15,6.2" stroke-linecap="round" stroke-linejoin="round"/>' +
+        '</g>' +
+        '<text x="19" y="11.5" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#7AD4C0">Pria</text>' +
+      '</g>';
 
     // Custom female node accent & compact gender indicator badge below name
     FamilyTree.templates.modernGlass_female = Object.assign({}, FamilyTree.templates.modernGlass);
@@ -85,12 +89,16 @@ export class FamilyTreeService {
       '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarClip_{id})" href="{val}" xlink:href="{val}" x="18" y="29" width="52" height="52"></image>';
 
     FamilyTree.templates.modernGlass_female.node =
-      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#db2777" stroke-width="1.5" class="ft-node-card"></rect>' +
+      '<rect x="0" y="0" height="110" width="250" fill="var(--bg-node, #0f172a)" rx="14" ry="14" stroke="#db2777" stroke-width="1.5" class="ft-node-card ft-node-female"></rect>' +
       '<g transform="translate(80, 42)">' +
-        '<rect x="0" y="0" width="48" height="15" rx="7.5" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
-        '<text x="24" y="11" text-anchor="middle" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">♀ Wanita</text>' +
-      '</g>' +
-      '<clipPath id="textClip_{id}"><rect x="80" y="18" width="124" height="85" /></clipPath>';
+        '<rect x="0" y="0" width="56" height="16" rx="8" fill="rgba(236, 72, 153, 0.2)" stroke="rgba(236, 72, 153, 0.4)" stroke-width="1"/>' +
+        '<g class="ft-gender-icon-female" stroke="#fbcfe8" stroke-width="1.3" fill="none">' +
+          '<circle cx="10" cy="6" r="2.8"/>' +
+          '<line x1="10" y1="8.8" x2="10" y2="13.5"/>' +
+          '<line x1="7.8" y1="11" x2="12.2" y2="11"/>' +
+        '</g>' +
+        '<text x="18" y="11.5" font-size="9" font-weight="600" font-family="Inter, sans-serif" fill="#fbcfe8">Wanita</text>' +
+      '</g>';
   }
 
   render(nodesData) {
@@ -110,6 +118,15 @@ export class FamilyTreeService {
       }
       if (!copy.tags || !Array.isArray(copy.tags)) {
         copy.tags = [copy.gender || 'male'];
+      }
+      if (copy.birthDate && copy.deathDate) {
+        copy.displayDate = `${copy.birthDate} - ${copy.deathDate}`;
+      } else if (copy.birthDate) {
+        copy.displayDate = copy.birthDate;
+      } else if (copy.deathDate) {
+        copy.displayDate = `Wafat: ${copy.deathDate}`;
+      } else {
+        copy.displayDate = '';
       }
       return copy;
     });
@@ -140,8 +157,8 @@ export class FamilyTreeService {
       scaleInitial: FamilyTree.match.boundary,
       nodeBinding: {
         field_0: 'name',
-        field_1: 'title',
-        field_2: 'birthDate',
+        field_1: 'job',
+        field_2: 'displayDate',
         img_0: 'img'
       },
       tags: {
@@ -227,9 +244,12 @@ export class FamilyTreeService {
           fid: n.fid ? String(n.fid) : undefined,
           name: n.name || '',
           gender: n.gender || 'male',
-          title: n.title || '',
           birthDate: n.birthDate || '',
+          isDeceased: Boolean(n.isDeceased || n.deathDate),
           deathDate: n.deathDate || '',
+          cemetery: n.cemetery || '',
+          cemeteryCoords: n.cemeteryCoords || '',
+          deathNotes: n.deathNotes || '',
           job: n.job || '',
           bio: n.bio || '',
           img: n.img || ''
