@@ -616,8 +616,6 @@ export class UIController {
     const isMobile = window.innerWidth <= 900;
     if (!isMobile) {
       this.showMemberDetail(member);
-    } else {
-      this.showToast(`Menampilkan "${member.name}" pada silsilah.`, 'info');
     }
 
     // Close mobile menu if open
