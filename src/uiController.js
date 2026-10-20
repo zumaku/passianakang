@@ -590,6 +590,7 @@ export class UIController {
     if (this.inputDeathNotes) this.inputDeathNotes.value = '';
     if (this.btnTestMaps) this.btnTestMaps.style.display = 'none';
     this.updateAvatarPreview('');
+    createIcons({ icons });
     this.memberModal.classList.add('open');
   }
 
@@ -649,6 +650,7 @@ export class UIController {
     }
 
     this.updateAvatarPreview(member.img || '');
+    createIcons({ icons });
     this.memberModal.classList.add('open');
   }
 

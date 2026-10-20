@@ -159,6 +159,14 @@
             <input type="hidden" id="memberId" />
             
             <div class="form-grid">
+              <!-- Section 1: Profil & Identitas -->
+              <div class="form-section-header">
+                <div class="form-section-title">
+                  <i data-lucide="user"></i>
+                  <span>Profil & Identitas</span>
+                </div>
+              </div>
+
               <div class="form-group-row full-width">
                 <div class="form-group form-group-name">
                   <label class="form-label" for="memberName">Nama Lengkap *</label>
@@ -236,12 +244,12 @@
               </div>
 
               <div class="form-group full-width">
-                <label class="form-label" for="memberJob">Pekerjaan / Status</label>
-                <input type="text" id="memberJob" class="form-control" placeholder="Contoh: Dosen, Dokter, Pelajar" />
+                <label class="form-label" for="memberJob">Pekerjaan / Profesi</label>
+                <input type="text" id="memberJob" class="form-control" placeholder="Contoh: Dosen, Dokter, Pelajar, Wiraswasta" />
               </div>
 
               <div class="form-group full-width">
-                <label class="form-label" for="memberImg">URL Foto / Avatar</label>
+                <label class="form-label" for="memberImg">Foto Profil / Avatar</label>
                 <div class="avatar-input-wrapper">
                   <div class="avatar-preview-wrap" id="avatarPreviewWrap" title="Pratinjau Foto">
                     <img id="avatarPreviewImg" class="avatar-preview-img" src="" alt="Pratinjau Foto" />
@@ -253,7 +261,15 @@
                 </div>
               </div>
 
-              <!-- Relasi -->
+              <!-- Section 2: Hubungan Silsilah / Keluarga -->
+              <div class="form-section-header">
+                <div class="form-section-title">
+                  <i data-lucide="network"></i>
+                  <span>Hubungan Keluarga</span>
+                </div>
+                <span class="form-section-desc">Tautkan orang tua & pasangan</span>
+              </div>
+
               <div class="form-group">
                 <label class="form-label" for="memberFather">Ayah</label>
                 <select id="memberFather" class="form-control">
@@ -273,6 +289,15 @@
                 <select id="memberSpouse" class="form-control">
                   <option value="">Belum Menikah</option>
                 </select>
+              </div>
+
+              <!-- Section 3: Catatan Tambahan -->
+              <div class="form-section-header">
+                <div class="form-section-title">
+                  <i data-lucide="notebook-pen"></i>
+                  <span>Catatan Tambahan</span>
+                </div>
+                <span class="form-section-desc">Opsional</span>
               </div>
 
               <div class="form-group full-width">
